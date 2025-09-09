@@ -113,13 +113,17 @@
     }
 
     /* Generic Page Sections */
-    section {
+    .homepage-content {
       padding: 4rem 2rem;
-      max-width: 800px;
+      max-width: 1000px;
       margin: 0 auto;
       background-color: #1A1A1A;
       margin-bottom: 2rem;
       border-radius: 8px;
+    }
+
+    .homepage-content h1 p{
+      padding:5px;
     }
 
     .page h2 {
@@ -143,6 +147,54 @@
       color: #bbbbbb;
       background-color: #1A1A1A;
     }
+
+    /* Stats */
+    .stats-section {
+      background-color: #1A1A1A;
+      padding: 4rem 2rem;
+      text-align: center;
+    }
+    
+    .stats-section h2 {
+      font-family: "Montserrat Alternates", sans-serif;
+      font-size: 2.5rem;
+      margin-bottom: 2rem;
+      color: #f5f5f5;
+    }
+    
+    .stats-grid {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 2rem;
+    }
+    
+    .stat {
+      background-color: #222;
+      border-radius: 10px;
+      padding: 2rem 1.5rem;
+      width: 200px;
+      transition: transform 0.3s ease;
+      box-shadow: 0 0 15px rgba(0,0,0,0.2);
+    }
+    
+    .stat:hover {
+      transform: scale(1.05);
+    }
+    
+    .stat .number {
+      font-size: 3rem;
+      font-weight: 700;
+      color: #99ccff;
+      font-family: "Montserrat Alternates", sans-serif;
+    }
+    
+    .stat .label {
+      margin-top: 0.5rem;
+      font-size: 1.2rem;
+      color: #ddd;
+    }
+
   </style>
 </head>
 
@@ -160,15 +212,41 @@
     </div>
   </nav>
 
+  <div class="page"
   <!-- Cover Section -->
   <div class="cover-section hero-darkened fade-in">
     <h1 class="fade-in" style="filter: brightness(100%);">Welcome to Fairview Homeschooler's Book Club!</h1>
   </div>
 
   <!-- Content Sections -->
- <section>
-   
+ <section class="homepage-content fade-in">
+   <h1 class="fade-in">Who are We?</h1>
+   <p class="fade-in">We are a humble band of homeschoolers who likes to read. We meet up, get to know each other LOREM LOREM I NEED HELP MAKING A WHO ARE WE</p>
  </section>
+    <!-- Club Stats Section -->
+<section class="stats-section">
+  <h2>Club Stats</h2>
+  <div class="stats-grid">
+    <div class="stat">
+      <div class="number" data-target="6">0</div>
+      <div class="label">Members</div>
+    </div>
+    <div class="stat">
+      <div class="number" data-target="10">0</div>
+      <div class="label">Books Read</div>
+    </div>
+    <div class="stat">
+      <div class="number" data-target="1">0</div>
+      <div class="label">Years Running</div>
+    </div>
+    <div class="stat">
+      <div class="number" data-target="0">0</div>
+      <div class="label">Monthly Meetups</div>
+    </div>
+  </div>
+</section>
+
+  </div>
   <!-- Footer -->
   <footer>
     &copy; 2025 Fairview Homeschoolers Book Club. All rights reserved.
@@ -234,6 +312,43 @@ document.addEventListener('DOMContentLoaded', () => {
   requestAnimationFrame(raf);
 
 });
+
+  <script>
+  const counters = document.querySelectorAll('.number');
+  const speed = 200; // lower is faster
+
+  const animateCounters = () => {
+    counters.forEach(counter => {
+      const updateCount = () => {
+        const target = +counter.getAttribute('data-target');
+        const count = +counter.innerText;
+
+        const increment = Math.ceil(target / speed);
+
+        if (count < target) {
+          counter.innerText = count + increment;
+          setTimeout(updateCount, 20);
+        } else {
+          counter.innerText = target;
+        }
+      };
+
+      updateCount();
+    });
+  };
+
+  // Animate when section is visible
+  let statsAnimated = false;
+  window.addEventListener('scroll', () => {
+    const statsSection = document.querySelector('.stats-section');
+    const rect = statsSection.getBoundingClientRect();
+    if (rect.top < window.innerHeight - 100 && !statsAnimated) {
+      animateCounters();
+      statsAnimated = true;
+    }
+  });
+</script>
+
 </script>
 </body>
 </html>
