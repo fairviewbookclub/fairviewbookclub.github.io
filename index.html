@@ -286,16 +286,52 @@ document.addEventListener("DOMContentLoaded", () => {
     // Now actually observe each element!
     faders.forEach((fader) => observer.observe(fader));
 });
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const counters = document.querySelectorAll('.number');
 
-/** Slideshow by w3schools **/
-function togglePopup(element) {
-  const popup = element.querySelector(".popuptext");
-  popup.classList.toggle("show");
-}
+    const animateCounters = () => {
+      counters.forEach(counter => {
+        const target = +counter.getAttribute('data-target');
+        let count = 0;
+
+        const increment = () => {
+          const step = Math.ceil(target / 50); // adjust speed here
+          count += step;
+          if (count < target) {
+            counter.innerText = count;
+            requestAnimationFrame(increment);
+          } else {
+            counter.innerText = target;
+          }
+        };
+
+        increment();
+      });
+    };
+
+    const statsSection = document.querySelector('.stats-section');
+
+    const observer = new IntersectionObserver((entries, observer) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          animateCounters();
+          observer.unobserve(statsSection); // run once only
+        }
+      });
+    }, {
+      threshold: 0.5 // 50% of the section must be visible
+    });
+
+    observer.observe(statsSection);
+  });
+</script>
+
+
 </script>
   <!-- Lenis Smooth Scroll-->
 <script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
-<script type>
+<script >
 document.addEventListener('DOMContentLoaded', () => {
   const lenis = new Lenis({
     lerp: 0.05,
@@ -313,41 +349,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 });
 
-  <script>
-  const counters = document.querySelectorAll('.number');
-  const speed = 200; // lower is faster
-
-  const animateCounters = () => {
-    counters.forEach(counter => {
-      const updateCount = () => {
-        const target = +counter.getAttribute('data-target');
-        const count = +counter.innerText;
-
-        const increment = Math.ceil(target / speed);
-
-        if (count < target) {
-          counter.innerText = count + increment;
-          setTimeout(updateCount, 20);
-        } else {
-          counter.innerText = target;
-        }
-      };
-
-      updateCount();
-    });
-  };
-
-  // Animate when section is visible
-  let statsAnimated = false;
-  window.addEventListener('scroll', () => {
-    const statsSection = document.querySelector('.stats-section');
-    const rect = statsSection.getBoundingClientRect();
-    if (rect.top < window.innerHeight - 100 && !statsAnimated) {
-      animateCounters();
-      statsAnimated = true;
-    }
-  });
-</script>
+ 
 
 </script>
 </body>
