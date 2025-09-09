@@ -126,6 +126,19 @@
       padding:5px;
     }
 
+    .home-images{
+      padding:5px;
+      border-radius:50px;
+    }
+
+    .left{
+      float:left;
+    }
+
+    .right{
+      float:right;
+    }
+
     .page h2 {
       color: #ffffff;
     }
@@ -222,24 +235,25 @@
  <section class="homepage-content fade-in">
    <h1 class="fade-in">Who are We?</h1>
    <p class="fade-in">We are a humble band of homeschoolers who likes to read. We meet up, get to know each other LOREM LOREM I NEED HELP MAKING A WHO ARE WE</p>
+   <img class="home-images right" src="https://github.com/fairviewbookclub/fairviewbookclub.github.io/blob/main/541511684_1992737948153693_1209059574442405965_n.jpg?raw=true">
  </section>
     <!-- Club Stats Section -->
-<section class="stats-section">
+<section class="stats-section fade-in">
   <h2>Club Stats</h2>
   <div class="stats-grid">
-    <div class="stat">
+    <div class="stat fade-in">
       <div class="number" data-target="6">0</div>
       <div class="label">Members</div>
     </div>
-    <div class="stat">
+    <div class="stat fade-in">
       <div class="number" data-target="10">0</div>
       <div class="label">Books Read</div>
     </div>
-    <div class="stat">
+    <div class="stat fade-in">
       <div class="number" data-target="1">0</div>
       <div class="label">Years Running</div>
     </div>
-    <div class="stat">
+    <div class="stat fade-in">
       <div class="number" data-target="0">0</div>
       <div class="label">Monthly Meetups</div>
     </div>
@@ -296,7 +310,7 @@ document.addEventListener("DOMContentLoaded", () => {
         let count = 0;
 
         const increment = () => {
-          const step = Math.ceil(target / 50); // adjust speed here
+          const step = Math.ceil(target / 2000); // adjust speed here
           count += step;
           if (count < target) {
             counter.innerText = count;
