@@ -268,7 +268,6 @@
 	  background-color: transparent;
 	  width: 300px;
 	  height: 300px;
-	  perspective: 1000px;
 	}
 	
 	.flip-card-inner {
@@ -294,11 +293,17 @@
 	  backface-visibility: hidden;
 	  border-radius: 12px;
 	}
-	
+
+	.flip-card-front img{
+		width:300px
+		height:300px;
+		border-radius:12px;
+	}
 	.flip-card-front {
 	  background-color: #2a2a2a;
 	  color: white;
 	  max-width:300px;
+	  box-sizing: border-box;
 	}
 	
 	.flip-card-back {
@@ -311,6 +316,18 @@
 	  flex-direction: column;
 	  justify-content: center;
 	  align-items: center;
+	}
+
+	.contact-section a{
+		text-decoration:none;
+		height:30px;
+		width:30px;
+		justify-content:sapce-evenly;
+		display:inline-block;
+	}
+
+	.contact-section:hover{
+		opacity:0.5;
 	}
 
 
@@ -392,13 +409,13 @@
   </div>
 		<!-- Book Club Flip Cards Section -->
 <section class="homepage-content fade-in">
-  <h2 style="text-align: center;">Meet Some of Our Members</h2>
+  <h2 style="text-align: center;">Meet the Crew</h2>
   <div class="card-grid">
-    <!-- Card 1 -->
+    <!-- Noa Cruz -->
     <div class="flip-card">
       <div class="flip-card-inner">
         <div class="flip-card-front">
-          <img src="https://github.com/fairviewbookclub/fairviewbookclub.github.io/blob/main/541663388_2574838212871578_1571633010646125746_n.jpg?raw=true" alt="Member 1">
+          <img src="https://github.com/fairviewbookclub/fairviewbookclub.github.io/blob/main/541663388_2574838212871578_1571633010646125746_n.jpg?raw=true"  width="300px" alt="Member 1">
         </div>
         <div class="flip-card-back">
           <h3>Noa</h3>
@@ -408,16 +425,21 @@
       </div>
     </div>
 
-    <!-- Card 2 -->
-    <div class="flip-card">
+    <!-- Me -->
+    <div class="flip-card fade-in">
       <div class="flip-card-inner">
         <div class="flip-card-front">
-          <img src="https://via.placeholder.com/300x300" alt="Member 2">
+          <img src="https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_640.png" width:="300px" alt="Member 2">
         </div>
         <div class="flip-card-back">
-          <h3>Sam</h3>
-          <p>Mystery & detective fan</p>
-          <p>Currently on: <em>Nancy Drew</em></p>
+          <h3>Isaac</h3>
+          <p>Tech Whiz</p>
+          <p><b>About Me:</b><em>Isaac is an aspiring web developer and the maker of this webpage. He is also an avid reader - mostly historical fiction and fantasty</em></p> <p>In his free time, Isaac likes chess, basketball and making poor life choices.</p>
+			<div class="contact-section">
+				<svg>
+					<a href="https://www.facebook.com/isaact.teodoro.15/"><image height="200" width="300" href="https://raw.githubusercontent.com/fairviewbookclub/fairviewbookclub.github.io/4ac8160255753b72fd21cb5e7eb025f0aeb506a9/messenger-svgrepo-com.svg" /></a>
+				</svg>
+			</div>
         </div>
       </div>
     </div>
