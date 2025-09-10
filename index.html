@@ -318,8 +318,39 @@
 	  flex-direction: column;
 	  justify-content: flex-start;
 	  align-items: center;
-	  overflow-y: auto;
       max-height: 100%;
+	  overflow-y: scroll; 
+	  scrollbar-width: none; 
+	  -ms-overflow-style: none;  
+      position:relative;
+	}
+/* Subtle hint for scroll, since no scroll bar in sight*/
+	.flip-card-back::after {
+	  content: '';
+	  position: absolute;
+	  bottom: 0;
+	  left: 0;
+	  width: 100%;
+	  height: 30px;
+	  background: linear-gradient(to bottom, rgba(28,28,28,0), rgba(28,28,28,1));
+	  pointer-events: none; /* lets clicks pass through */
+	}
+
+	.flip-card-back::before {
+	  content: '';
+	  position: absolute;
+	  top: 0;
+	  left: 0;
+	  width: 100%;
+	  height: 30px;
+	  background: linear-gradient(to top, rgba(28,28,28,0), rgba(28,28,28,1));
+	  pointer-events: none;
+	}
+
+
+	  
+	.flip-card-back::-webkit-scrollbar {
+	  display: none; 
 	}
 
 	.contact-section a{
@@ -441,11 +472,11 @@
           <p><b>About Me:</b><em>Isaac is an aspiring web developer and the maker of this webpage. He is also an avid reader - mostly historical fiction and fantasty</em></p> <p>In his free time, Isaac likes chess, basketball and making poor life choices.</p>
 			<div class="contact-section">
   <a href="https://www.facebook.com/isaact.teodoro.15/" target="_blank" rel="noopener">
-    <img src="https://raw.githubusercontent.com/fairviewbookclub/fairviewbookclub.github.io/4ac8160255753b72fd21cb5e7eb025f0aeb506a9/messenger-svgrepo-com.svg"
+    <img src="https://www.svgrepo.com/show/431793/messenger.svg"
          alt="Messenger Icon" height="30" width="30" />
   </a>
    <a href="it0916teodoro@gmail.com" target="_blank" rel="noopener">
-    <img src="https://www.svgrepo.com/show/303161/gmail-icon-logo.svg"
+    <img src="https://www.svgrepo.com/show/468988/gmail.svg"
          alt="Gmail Icon" height="30" width="30" />
   </a>
 </div>
