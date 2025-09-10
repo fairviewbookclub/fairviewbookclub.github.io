@@ -238,7 +238,7 @@
     
     .current-book {
 	  padding:10px;
-	  max-width:45%;
+	  max-width:50%;
       display: grid;
       flex-wrap: wrap;
       align-items: center;
@@ -275,6 +275,47 @@
 	  height: auto; 
 	  min-height: 400px; 
 	  align-self: stretch; 
+	}
+
+	.button {
+	  border-radius: 4px;
+	  background-color: #99ccff;
+	  border: none;
+	  color: #FFFFFF;
+	  text-align: center;
+	  font-size: 28px;
+	  padding: 20px;
+	  width: 180px;
+	  height:65px;
+	  transition: all 0.5s;
+	  cursor: pointer;
+	  margin: 5px;
+	  justify-content:space-evenly;
+	}
+
+	.button span {
+	  cursor: pointer;
+	  display: inline-block;
+	  position: relative;
+	  transition: 0.5s;
+	}
+	
+	.button span:after {
+	  content: '\00bb';
+	  position: absolute;
+	  opacity: 0;
+	  top: 0;
+	  right: -20px;
+	  transition: 0.5s;
+	}
+	
+	.button:hover span {
+	  padding-right: 25px;
+	}
+	
+	.button:hover span:after {
+	  opacity: 1;
+	  right: 0;
 	}
 	  
 	.card-grid {
@@ -391,7 +432,12 @@
  <section class="homepage-content fade-in">
    <h1 class="fade-in">Who are We?</h1>
     <img class="home-images right fade-in" src="https://github.com/fairviewbookclub/fairviewbookclub.github.io/blob/main/541511684_1992737948153693_1209059574442405965_n.jpg?raw=true">
-    <p class="fade-in">We are a humble band of homeschoolers who likes to read. We meet up, get to know each other, and dive into stories that spark curiosity, conversation, and connection. From classics like <em>Little Women</em> to new favorites like <em>Barve</em> or <em>Resistance</em>, every book we read brings something new to discuss, imagine, and learn together. Our club is situated and aimed for ALL Fairview Homeschoolers who likes to read. To find out more, go here. If you want to join, please head out here.</p>
+    <p class="fade-in">We are a humble band of homeschoolers who simply love to read. Brought together by a shared curiosity and a love for stories, we meet regularly to connect, chat, and journey through books that spark imagination and thoughtful conversation.</p>
+<p class="fade-in">
+Sometimes we explore timeless classics like <em>Pride and Prejudice</em>, and other times we dive into famous modern reads like <em>Brave</em> or <em>Land of Stories</em>. Whatever the book, each one brings fresh ideas to consider, in which we can discuss as a group, while having fun with it!</p>
+<p class="fade-in">
+Our book club is created by and for homeschoolers in Fairview, and it’s open to all who enjoy reading and sharing that joy with others. Whether you're a seasoned bookworm or just starting to fall in love with reading, you’re welcome here.</p>
+	 <button onClick="javascript:changePage(2);" class="button fade-in"><span>Learn More </span></button>
  </section>
 	  <div class="books-container">
 <section class="current-book fade-in ">
