@@ -475,8 +475,7 @@
     height: var(--cards-container-size);
     padding: var(--cards-container-padding);
 
-    /* Clip path only on larger screens */
-    @media (min-width: 601px) {
+    @media (width > 600px) {
       clip-path: polygon(0 0, 100% 0, 100% 50%, 0 50%);
     }
 
@@ -493,16 +492,6 @@
       --label-size: 50px;
       --border-color: var(--label-color);
     }
-
-    /* For small screens, remove circle size constraint */
-    @media (max-width: 600px) {
-      width: 100%;
-      height: auto;
-      --radius: 0;
-      --cards-container-padding: 1rem;
-      clip-path: none;
-      margin: 2rem auto;
-    }
   }
 
   .cards {
@@ -513,21 +502,6 @@
     border: 1px solid var(--border-color);
     transition: transform 0.3s ease-in-out var(--duration);
     list-style: none;
-    margin: 0;
-    padding: 0;
-
-    /* For small screens, make the cards stack vertically */
-    @media (max-width: 600px) {
-      position: relative;
-      aspect-ratio: auto;
-      border: none;
-      height: auto;
-      width: 100%;
-      display: flex;
-      flex-direction: column;
-      gap: 2rem;
-      transform: none !important;
-    }
   }
 
   .cards li {
@@ -536,38 +510,12 @@
     margin: 0;
     padding: 0;
     transform-origin: center;
-    display: grid;
-    place-content: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* vertical centering */
+    align-items: center;     /* horizontal centering */
     pointer-events: none;
-    transition: transform 0.3s ease;
-
-    /* Use CSS variable for rotation index */
     transform: rotate(calc(var(--i) * 360deg / var(--items)));
-
-    /* For small screens, make them relative and stacked */
-    @media (max-width: 600px) {
-      position: relative;
-      inset: auto;
-      transform: none !important;
-      pointer-events: auto;
-      grid-template-rows: auto auto auto;
-      place-content: start;
-      padding: 0 1rem;
-      border-left: 4px solid transparent;
-      transition: border-color 0.3s ease;
-    }
-  }
-
-  /* Highlight border on selected item for small screen */
-  .cards li:has(input:checked) {
-    pointer-events: auto;
-  }
-  @media (max-width: 600px) {
-    .cards li:has(input:checked) {
-      border-left-color: steelblue;
-      background-color: #f9f9f9;
-      border-radius: 4px;
-    }
   }
 
   .cards li > label {
@@ -581,19 +529,8 @@
     pointer-events: initial;
     text-align: center;
     color: var(--label-color);
-    font-size: clamp(0.8rem, 2.5vw + 0.04rem, 1rem);
-    transition: color var(--duration) ease-in-out;
-
-    @media (max-width: 600px) {
-      position: relative;
-      inset: auto;
-      transform: none;
-      width: auto;
-      height: auto;
-      font-weight: 600;
-      color: var(--label-color);
-      padding-left: 0.5rem;
-    }
+    font-size: clamp(.8rem, 2.5vw + .04rem, 1rem);
+    transition: var(--duration) ease-in-out;
   }
 
   .cards li > label::before {
@@ -604,19 +541,10 @@
     translate: -50% 0;
     width: var(--label-dot-size);
     height: var(--label-dot-size);
-    aspect-ratio: 1 / 1;
+    aspect-ratio: 50%;
     border-radius: 50%;
     background-color: var(--label-color);
     transition: background-color var(--duration) ease-in-out;
-
-    @media (max-width: 600px) {
-      position: relative;
-      top: auto;
-      left: auto;
-      translate: none;
-      margin-right: 0.5rem;
-      display: inline-block;
-    }
   }
 
   .cards li > label::after {
@@ -629,105 +557,75 @@
     height: var(--label-line-h);
     background-color: steelblue;
     transition: height 300ms ease-in-out var(--label-line-delay, 0ms);
-
-    @media (max-width: 600px) {
-      display: none;
-    }
   }
 
   .cards li > label:hover {
     --label-color: var(--label-color-hover);
   }
 
+  /* Text inside each card */
   .cards > li > h2,
   .cards > li > p {
-    position: absolute;
-    left: 50%;
-    text-align: center;
-    transform: translate(-50%, 0);
-    transform-origin: center;
+    position: static; /* no absolute */
     opacity: 0;
-    transition: opacity var(--duration) ease-in-out,
-      transform var(--duration) ease-in-out;
     pointer-events: none;
     user-select: none;
-
-    @media (max-width: 600px) {
-      position: relative;
-      left: auto;
-      transform: none;
-      text-align: left;
-      opacity: 1 !important;
-      pointer-events: auto;
-      user-select: auto;
-      width: 100%;
-      margin-top: 0.5rem;
-      transform: none !important;
-    }
+    text-align: center;
+    margin: 0.3rem 0;
+    transition: opacity var(--duration) ease-in-out;
+    max-width: var(--info-width);
   }
 
-  .cards > li > h2 {
-    top: var(--title-top);
-    translate: 0 var(--title-offset-y);
-    font-size: clamp(1rem, 3vw, 1.5rem);
-  }
-
-  .cards > li > p {
-    top: var(--info-top);
-    margin: 0 auto;
-    width: var(--info-width);
-    font-size: clamp(0.8rem, 2.5vw + 0.05rem, 0.9rem);
-    text-align: left;
-  }
-
-  /* Show text only for checked card */
+  /* Show text on checked card */
   .cards li:has(input:checked) > h2,
   .cards li:has(input:checked) > p {
     opacity: 1;
-    transform: translate(0, 0);
     pointer-events: auto;
     user-select: auto;
   }
 
-  /* Animate label line height for selected */
-  .cards li:has(input:checked) > label::after {
-    height: var(--label-line-h-current);
-    transition-delay: calc(var(--duration) * 2);
+  /* update custom properties for checked item */
+  li:has(input:checked) {
+    --label-opacity: 1;
+    --label-color: var(--label-color-hover);
+    --label-line-h: var(--label-line-h-current);
+    --label-line-delay: calc(var(--duration) * 2);
   }
 
-  /* Highlight label color on selected */
-  .cards li:has(input:checked) > label {
-    color: var(--label-color-hover);
-  }
-
-  /* Rotate container based on checked radio */
+  /* rotate container based on checked radio */
   .cards:has(input:checked) {
     transform: rotate(calc(var(--base-rotation) - (var(--index) * var(--full-circle) / var(--items))));
   }
 
-  /* Index for each checked card */
+  /*
+  this would be so much simpler if we could use counter values as custom property values
+  */
   .cards:has(li:nth-child(1) > input:checked) {
     --index: 0;
   }
+
   .cards:has(li:nth-child(2) > input:checked) {
     --index: 1;
   }
+
   .cards:has(li:nth-child(3) > input:checked) {
     --index: 2;
   }
+
   .cards:has(li:nth-child(4) > input:checked) {
     --index: 3;
   }
+
   .cards:has(li:nth-child(5) > input:checked) {
     --index: 4;
   }
+
   .cards:has(li:nth-child(6) > input:checked) {
     --index: 5;
   }
-  .cards:has(li:nth-child(7) > input:checked) {
-    --index: 6;
-  }
-}
+
+  .cards:has(li:nth-child(7) > input:checked
+
 
 
 
