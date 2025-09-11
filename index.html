@@ -19,7 +19,7 @@
       background-color: #121212; /* Very dark gray */
       color: #f5f5f5; /* Soft white for dark mode */
       line-height: 1.6;
-	  position:relative;
+	  overflow-x: hidden; /* Prevents x-overflow*/
     }
  /* Lenis Scroll Styling */
         html.lenis {
@@ -424,29 +424,37 @@
 	  }
 	}
 
-	.side-decor {
-	  position: absolute;
-	  top: 50%;
-	  transform: translateY(-50%);
-	  z-index: 5; /* Above card backgrounds, below navbar (which is 1000) */
-	  pointer-events: none; /* Doesn’t block clicks or text */
-	  opacity: 0.8; /* Optional: slightly transparent */
+	.side-decor-left, .side-decor-right {
+	  position: relative; /* or static */
+	  width: 240px; /* width of visible part */
+	  height: 400px; /* or image height */
+	  overflow: hidden;
+	}
+
+	.side-decor-left {
+	  float: left; /* or position: relative and left: 0 */
+	  margin-right: 20px; /* spacing from content */
 	}
 	
-	.side-adecor-left {
-	  left: 0.5rem; /* Adjust for desired spacing from edge */
+	.side-decor-left img {
+	  position: relative;
+	  left: -160px; /* shift left image left by the hidden amount */
+	  width: 400px;
+	  height: auto;
 	}
 	
 	.side-decor-right {
-	  right: 0.5rem; /* Adjust similarly */
+	  float: right; /* or position: relative and right: 0 */
+	  margin-left: 20px;
 	}
 	
-	.side-decor img {
-	  display: block;
-	  width: 400px; /* Adjust size as needed */
+	.side-decor-right img {
+	  position: relative;
+	  right: -160px; /* shift right image right by the hidden amount */
+	  width: 400px;
 	  height: auto;
-	  max-height: 80%; /* Prevent oversizing beyond section height */
 	}
+
 /* Button esponsiveness */
 	@media (max-width: 768px) {
 	  .button {
@@ -491,7 +499,7 @@ Our book club is created by and for homeschoolers in Fairview, and it’s open t
 	 <button onClick="javascript:changePage(2);" class="button fade-in"><span>Learn More </span></button>
  </section>
 	  <!--- Harry Potter Decor -->
-	  <div class="side-decor side-decor-left fade-in">
+	  <div class="side-decor-left fade-in">
     <img src="https://github.com/fairviewbookclub/fairviewbookclub.github.io/blob/main/ijl1k1b46kg781ju8p2o41pu97-952c8add5973bcc157f2c43951e49d64.png?raw=true" alt="Potter decoration">
   </div>
 	  <div class="books-container">
@@ -524,7 +532,7 @@ Our book club is created by and for homeschoolers in Fairview, and it’s open t
 	  </div>
   
    <!--- Repechieep -->
-	  <div class="side-decor side-decor-right fade-in">
+	  <div class="side-decor-right fade-in">
     <img src="https://github.com/fairviewbookclub/fairviewbookclub.github.io/blob/main/reepicheep-edmund-pevensie-aslan-eustace-scrubb-the-chronicles-of-narnia-lethal-998501b307c48f1e814fdf1d1e6afcd3.png?raw=true" alt="Reep decoration">
   </div>
     <br><br>
@@ -572,7 +580,7 @@ So go ahead, don’t be shy — give it a click and see what’s coming up next.
 
 	 <button onClick="javascript:changePage(5);" class="button fade-in"><span>Events </span></button>
  </section>
-	   <div class="side-decor side-decor-left fade-in">
+	   <div class="side-decor-left fade-in">
     <img src="https://github.com/fairviewbookclub/fairviewbookclub.github.io/blob/main/aslan-lion-desktop-wallpaper-download-lion-d14cd90631f82fce6613dd53693c5253.png?raw=true" style="transform: scaleX(-1);" alt="Aslan decoration">
   </div>
   </div>
