@@ -19,6 +19,7 @@
       background-color: #121212; /* Very dark gray */
       color: #f5f5f5; /* Soft white for dark mode */
       line-height: 1.6;
+	  position:relative;
     }
  /* Lenis Scroll Styling */
         html.lenis {
@@ -417,217 +418,43 @@
 	    text-align: center;
 	  }
 
-  .home-images {
-    max-width: 100%;
-    height: auto;
-  }
-}
+	  .home-images {
+	    max-width: 100%;
+	    height: auto;
+	  }
+	}
 
-	  /* Timeline */
-@import "https://codepen.io/cbolson/pen/rNEdgKo.css" layer(template);
-@layer template, demo;
-
-@layer demo {
-  /* Hide radio buttons */
-  input[type="radio"] {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    padding: 0;
-    margin: -1px;
-    overflow: hidden;
-    clip: rect(0, 0, 0, 0);
-    white-space: nowrap;
-    border-width: 0;
-  }
-
-  .cards-container {
-    --base-rotation: 0deg;
-    --full-circle: 360deg;
-    --radius: 40vw;
-    --duration: 200ms;
-
-    --cards-container-size: calc(var(--radius) * 2);
-    --cards-container-padding: 2rem;
-
-    --border-color: transparent;
-
-    --label-offset: calc(var(--radius) * -1 - 1rem);
-    --label-size: 30px;
-    --label-color: #666;
-    --label-color-hover: steelblue;
-    --label-line-h: 0;
-    --label-line-h-current: 2rem;
-    --label-dot-size: 10px;
-
-    --title-top: 1.5rem;
-    --title-offset-y: 30px;
-
-    --info-top: 5rem;
-    --info-width: min(70%, 500px);
-    --info-offset-y: 30px;
-
-    box-sizing: content-box;
-    position: relative;
-    inset: 0;
-    margin: 5rem auto;
-    width: var(--cards-container-size);
-    height: var(--cards-container-size);
-    padding: var(--cards-container-padding);
-
-    @media (width > 600px) {
-      clip-path: polygon(0 0, 100% 0, 100% 50%, 0 50%);
-    }
-
-    @media (min-width: 800px) {
-      --radius: 30vw;
-      --label-size: 40px;
-      --label-dot-size: 15px;
-      --label-line-h-current: 4rem;
-      --title-top: 4rem;
-      --info-top: 8rem;
-    }
-
-    @media (min-width: 1200px) {
-      --label-size: 50px;
-      --border-color: var(--label-color);
-    }
-  }
-
-  .cards {
-    position: absolute;
-    inset: var(--cards-container-padding);
-    aspect-ratio: 1;
-    border-radius: 50%;
-    border: 1px solid var(--border-color);
-    transition: transform 0.3s ease-in-out var(--duration);
-    list-style: none;
-  }
-
-  .cards li {
-    position: absolute;
-    inset: 0;
-    margin: 0;
-    padding: 0;
-    transform-origin: center;
-    display: flex;
-    flex-direction: column;
-    justify-content: center; /* vertical centering */
-    align-items: center;     /* horizontal centering */
-    pointer-events: none;
-    transform: rotate(calc(var(--i) * 360deg / var(--items)));
-  }
-
-  .cards li > label {
-    position: absolute;
-    inset: 0;
-    margin: auto;
-    transform: translateY(var(--label-offset));
-    width: var(--label-size);
-    height: var(--label-size);
-    cursor: pointer;
-    pointer-events: initial;
-    text-align: center;
-    color: var(--label-color);
-    font-size: clamp(.8rem, 2.5vw + .04rem, 1rem);
-    transition: var(--duration) ease-in-out;
-  }
-
-  .cards li > label::before {
-    content: '';
-    position: absolute;
-    top: var(--cards-container-padding);
-    left: 50%;
-    translate: -50% 0;
-    width: var(--label-dot-size);
-    height: var(--label-dot-size);
-    aspect-ratio: 50%;
-    border-radius: 50%;
-    background-color: var(--label-color);
-    transition: background-color var(--duration) ease-in-out;
-  }
-
-  .cards li > label::after {
-    content: '';
-    position: absolute;
-    top: 100%;
-    left: 50%;
-    translate: -50% 5px;
-    width: 2px;
-    height: var(--label-line-h);
-    background-color: steelblue;
-    transition: height 300ms ease-in-out var(--label-line-delay, 0ms);
-  }
-
-  .cards li > label:hover {
-    --label-color: var(--label-color-hover);
-  }
-
-  /* Text inside each card */
-  .cards > li > h2,
-  .cards > li > p {
-    position: static; /* no absolute */
-    opacity: 0;
-    pointer-events: none;
-    user-select: none;
-    text-align: center;
-    margin: 0.3rem 0;
-    transition: opacity var(--duration) ease-in-out;
-    max-width: var(--info-width);
-  }
-
-  /* Show text on checked card */
-  .cards li:has(input:checked) > h2,
-  .cards li:has(input:checked) > p {
-    opacity: 1;
-    pointer-events: auto;
-    user-select: auto;
-  }
-
-  /* update custom properties for checked item */
-  li:has(input:checked) {
-    --label-opacity: 1;
-    --label-color: var(--label-color-hover);
-    --label-line-h: var(--label-line-h-current);
-    --label-line-delay: calc(var(--duration) * 2);
-  }
-
-  /* rotate container based on checked radio */
-  .cards:has(input:checked) {
-    transform: rotate(calc(var(--base-rotation) - (var(--index) * var(--full-circle) / var(--items))));
-  }
-
-  /*
-  this would be so much simpler if we could use counter values as custom property values
-  */
-  .cards:has(li:nth-child(1) > input:checked) {
-    --index: 0;
-  }
-
-  .cards:has(li:nth-child(2) > input:checked) {
-    --index: 1;
-  }
-
-  .cards:has(li:nth-child(3) > input:checked) {
-    --index: 2;
-  }
-
-  .cards:has(li:nth-child(4) > input:checked) {
-    --index: 3;
-  }
-
-  .cards:has(li:nth-child(5) > input:checked) {
-    --index: 4;
-  }
-
-  .cards:has(li:nth-child(6) > input:checked) {
-    --index: 5;
-  }
-
-  .cards:has(li:nth-child(7) > input:checked
-
-
-
+	.side-decor {
+	  position: absolute;
+	  top: 50%;
+	  transform: translateY(-50%);
+	  z-index: 5; /* Above card backgrounds, below navbar (which is 1000) */
+	  pointer-events: none; /* Doesn’t block clicks or text */
+	  opacity: 0.8; /* Optional: slightly transparent */
+	}
+	
+	.side-adecor-left {
+	  left: 0.5rem; /* Adjust for desired spacing from edge */
+	}
+	
+	.side-decor-right {
+	  right: 0.5rem; /* Adjust similarly */
+	}
+	
+	.side-decor img {
+	  display: block;
+	  width: 400px; /* Adjust size as needed */
+	  height: auto;
+	  max-height: 80%; /* Prevent oversizing beyond section height */
+	}
+/* Button esponsiveness */
+	@media (max-width: 768px) {
+	  .button {
+	    width: 100%;
+	    font-size: 20px;
+	    padding: 15px;
+	  }
+	}
 
   </style>
 </head>
@@ -663,6 +490,10 @@ Sometimes we explore timeless classics like <em>Pride and Prejudice</em>, and ot
 Our book club is created by and for homeschoolers in Fairview, and it’s open to all who enjoy reading and sharing that joy with others. Whether you're a seasoned bookworm or just starting to fall in love with reading, you’re welcome here.</p>
 	 <button onClick="javascript:changePage(2);" class="button fade-in"><span>Learn More </span></button>
  </section>
+	  <!--- Harry Potter Decor -->
+	  <div class="side-decor side-decor-left">
+    <img src="https://www.pngfind.com/pngs/m/166-1665538_valuable-design-harry-potter-clip-art-star-clipart.png" alt="Potter decoration">
+  </div>
 	  <div class="books-container">
 <section class="current-book fade-in ">
   <h2>Current Monthly Book</h2>
@@ -745,35 +576,7 @@ So go ahead, don’t be shy — give it a click and see what’s coming up next.
     <h1 class="fade-in" >About Us</h1>
   </div>
 <br></br>
-	  <h1>Timeline</h1>
-	  <div class="cards-container">
-        <ul class="cards" style="--items: 26;">
-            <li style="--i: 0;">
-                <input type="radio" id="item-0" name="gallery-item" checked>
-                <label for="item-0">09 2025</label>
-                <h2>Sept. 01, 2025</h2>
-                <p>Elischa Cruz had the idea of a homeschool book club during the 2025 Fairview Homeschoolers <em>Panlarong Pinoy Event</em>, after the <em>Tumbang Preso</em> Game.</p>
-            </li>
-            <li style="--i: 1;">
-                <input type="radio" id="item-1" name="gallery-item">
-                <label for="item-1">09 2025</label>
-                <h2>Sept. 03, 2025</h2>
-                <p>Noa, our CEO, has contacted Yumi and her mom. Isaac and Iris also joined</p>
-            </li>
-            <li style="--i: 2;">
-                <input type="radio" id="item-2" name="gallery-item">
-                <label for="item-2">09 2025</label>
-                <h2>Sept. 09, 2025</h2>
-                <p>Noa, Yumi, Isaac and Iris - the Council, met up via video call to establish the team structutre, rules and everything else. Isaac made the Webpage's homepage</p>
-            </li>
-            <li style="--i: 3;">
-                <input type="radio" id="item-3" name="gallery-item">
-                <label for="item-3">09, 2025</label>
-                <h2>Sept. 10, 2025</h2>
-                <p>Isaac Finished the Homepage and the Members Page and made this timeline</p>
-            </li>
-            
-  </div>
+	
   </div>
   <div class="page"></div>
   <!-- Members -->
@@ -805,14 +608,14 @@ So go ahead, don’t be shy — give it a click and see what’s coming up next.
     <div class="flip-card fade-in">
       <div class="flip-card-inner">
         <div class="flip-card-front">
-          <img src="https://github.com/fairviewbookclub/fairviewbookclub.github.io/blob/main/541919971_625424813952996_5433340435562432565_n.jpg?raw=true" width:="300px" alt="Isaac">
+          <img src="https://github.com/fairviewbookclub/fairviewbookclub.github.io/blob/main/541919971_625424813952996_5433340435562432565_n.jpg?raw=true" width="300px" alt="Isaac">
         </div>
         <div class="flip-card-back">
           <h3 class="fade-in">Isaac</h3>
           <p class="fade-in">Tech Whiz</p>
           <p class="fade-in"><em>Isaac is an aspiring web developer and the maker of this webpage. He is also an avid reader - mostly historical fiction and fantasty. Unlike the CEO, he likes 39 Clues and for some reason also like mentioning it to the CEO. It's a miracle he's not dead yet.</em></p> <p><em>In his free time, Isaac likes chess, basketball, making poor life choices and of course reading.</em></p>
 			<div class="contact-section fade-in">
-  <a href="https://www.facebook.com/isaact.teodoro.15/" class="conatct-links fade-in" target="_blank" rel="noopener">
+  <a href="https://www.facebook.com/isaact.teodoro.15/" class="contact-links fade-in" target="_blank" rel="noopener">
     <img src="https://www.svgrepo.com/show/431793/messenger.svg"
          alt="Messenger Icon" height="30" width="30" />
   </a>
@@ -826,14 +629,14 @@ So go ahead, don’t be shy — give it a click and see what’s coming up next.
     <div class="flip-card fade-in">
       <div class="flip-card-inner">
         <div class="flip-card-front">
-          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTYhcfWlS4wBL1KbIIXYrmPomsh3mCAOJvRGQ&s" width:="300px" alt="Yumi">
+          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTYhcfWlS4wBL1KbIIXYrmPomsh3mCAOJvRGQ&s" width="300px" alt="Yumi">
         </div>
         <div class="flip-card-back">
           <h3 class="fade-in">Yumi</h3>
           <p class="fade-in">Event Capturer</p>
           <p class="fade-in"><em>Like mentioned above, Yumi is the club's official photographer, although as of now her photograpy skills have yet to be witnessed. As also mentioned above, she is the cousin of the CEO. <strong>NOT</strong> mentioned above is the fact that she has a little sister.  </em></p>
 			<div class="contact-section fade-in">
-  <a href="https://www.facebook.com/100090034992292" class="conatct-links fade-in" target="_blank" rel="noopener">
+  <a href="https://www.facebook.com/100090034992292" class="contact-links fade-in" target="_blank" rel="noopener">
     <img src="https://www.svgrepo.com/show/431793/messenger.svg"
          alt="Messenger Icon" height="30" width="30" />
   </a>
@@ -842,14 +645,14 @@ So go ahead, don’t be shy — give it a click and see what’s coming up next.
     <div class="flip-card fade-in">
       <div class="flip-card-inner">
         <div class="flip-card-front">
-          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTYhcfWlS4wBL1KbIIXYrmPomsh3mCAOJvRGQ&s" width:="300px" alt="Iris">
+          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTYhcfWlS4wBL1KbIIXYrmPomsh3mCAOJvRGQ&s" width="300px" alt="Iris">
         </div>
         <div class="flip-card-back">
           <h3 class="fade-in">Iris</h3>
           <p class="fade-in">IDK yet</p>
           <p class="fade-in"><em>Iris is the sister of the team's tech whiz. She is 13 years of age as of now.   </em></p>
 			<div class="contact-section fade-in">
-  <a href="https://www.facebook.com/100090034992292" class="conatct-links fade-in" target="_blank" rel="noopener">
+  <a href="https://www.facebook.com/100090034992292" class="contact-links fade-in" target="_blank" rel="noopener">
     <img src="https://www.svgrepo.com/show/431793/messenger.svg"
          alt="Messenger Icon" height="30" width="30" />
   </a>
