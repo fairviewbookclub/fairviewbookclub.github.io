@@ -94,6 +94,19 @@
 		filter: opacity(50%);
 	}
 
+	.cover-section2 {
+      position: relative;
+      height: 400px;
+      background-image:url("https://github.com/fairviewbookclub/fairviewbookclub.github.io/blob/main/541511684_1992737948153693_1209059574442405965_n.jpg?raw=true");
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+    }
+
      .cover-section4 {
       position: relative;
       height: 400px;
@@ -431,6 +444,52 @@
 	  }
 	}
 
+	/* SLideshow quotes */
+	.quote-slideshow {
+	  background-color: #1A1A1A;
+	  padding: 4rem 2rem;
+	  text-align: center;
+	  border-top: 2px solid #333;
+	  border-bottom: 2px solid #333;
+	  margin: 3rem auto;
+	  max-width: 1000px;
+	}
+
+	.quote-box {
+	  background-color: #222;
+	  border-radius: 12px;
+	  padding: 3rem 2rem;
+	  box-shadow: 0 0 20px rgba(0,0,0,0.5);
+	  transition: opacity 1s ease-in-out;
+	}
+	
+	.quote-text {
+	  font-family: 'Montserrat Alternates', sans-serif;
+	  font-size: 2rem;
+	  font-weight: 600;
+	  color: #99ccff;
+	  line-height: 1.6;
+	  margin-bottom: 1rem;
+	}
+	
+	.quote-author {
+	  font-size: 1.2rem;
+	  color: #ccc;
+	  font-style: italic;
+	}
+	
+	/* Responsive tweaks */
+	@media (max-width: 600px) {
+	  .quote-text {
+	    font-size: 1.5rem;
+	  }
+	
+	  .quote-author {
+	    font-size: 1rem;
+	  }
+	}
+
+
   </style>
 </head>
 
@@ -548,12 +607,38 @@ So go ahead, don’t be shy — give it a click and see what’s coming up next.
   </div>
 
   <div class="page">
-	  <div class="cover-section hero-darkened fade-in">
+	  <div class="cover-section2 hero-darkened fade-in">
     <h1 class="fade-in" >About Us</h1>
   </div>
 <br></br>
-	
+<section class="homepage-content fade-in">
+   <h1 class="fade-in">What Makes Us Unique?</h1>
+    <img class="home-images right fade-in" src="https://github.com/fairviewbookclub/fairviewbookclub.github.io/blob/main/peter-pan-peter-and-wendy-wendy-darling-captain-hook-tinker-bell-peter-pan-png-photo-2db385003f4ad83ed5fdc3062a9f5df5.png?raw=true" width="200px">
+    <p class="fade-in">We are <strong><em>NOT</em></strong> your traditional book club? Sure, we are a teen group and we read books (obviously as this is a <em>Book</em> Club), but we also watch the movie adaptations if the book has them. So this group is could also be a movie club! We don't care about the page numbers (although some of us might, because of some of the lengths), we care about the <em>story</em> and how it made us feel.</p>
+	<p class="fade-in">We also meet up monthy, and if you look at the team structure below, that's where our uniqueness truly shines.</p>
+ </section>
+	  <br>
+	  <section class="quote-slideshow fade-in">
+  <div class="quote-box">
+    <div class="quote-text" id="quoteText">“Books are a uniquely portable magic.”</div>
+    <div class="quote-author" id="quoteAuthor">— Stephen King</div>
   </div>
+</section>
+<br>
+	  <section class="homepage-content fade-in">
+   <h1 class="fade-in">What Makes Us Unique?</h1>
+    <img class="home-images left fade-in" src="https://github.com/fairviewbookclub/fairviewbookclub.github.io/blob/main/mia-wasikowska-alice-s-adventures-in-wonderland-alice-in-wonderland-film-actor-wonderland-a2e031e4c75aad8ff1fdd8ca35c431dc.png?raw=true" width="250px">
+    <p class="fade-in">
+		Ok so I promise I won't bore you, but you really have to see this.
+		</p>
+		  <p class="fade-in">Noa, since she's the founder, is the CEO. There are a group of staff members, known as the Council who has specific jobs, find out more in the Members Page. Noa's mom, Tita Sarah is, in a sense, our Grandmaster (or basically our adviser, I thought Grandmaster sounded cooler). She oversees the group. Every month, we meet up and choos a book to read for that month. We will all give out a book name and cast a vote. Whoever book wins, that guy/girl would be the leader for the month. Then, the next month, the whole process starts again.</p>
+		  <p class="fade-in">
+		P.S. I told you I wouldn't bore you. Or did I? 
+		</p>
+		  <h1 style="padding-left:15px;">TIMELINE: Coming Soon!</h1>
+ </section>
+  </div>
+	
   <div class="page"></div>
   <!-- Members -->
     <div class="page">
@@ -740,6 +825,60 @@ document.addEventListener("DOMContentLoaded", () => {
 
     observer.observe(statsSection);
   });
+
+	// Slideshow quotes
+	 const quotes = [
+    {
+      text: "Books are a uniquely portable magic.",
+      author: "Stephen King"
+    },
+    {
+      text: "A reader lives a thousand lives before he dies... The man who never reads lives only one.",
+      author: "George R.R. Martin"
+    },
+    {
+      text: "Until I feared I would lose it, I never loved to read. One does not love breathing.",
+      author: "Harper Lee"
+    },
+    {
+      text: "There is no friend as loyal as a book.",
+      author: "Ernest Hemingway"
+    },
+	{
+      text: "We don’t just read books. We unravel them, argue about them, and occasionally threaten to throw them out the window.",
+      author: "Some Wise Guy"
+    },
+    {
+      text: "Once you learn to read, you will be forever free.",
+      author: "Frederick Douglass"
+    }
+  ];
+
+  let currentQuote = 0;
+
+  function showNextQuote() {
+    const quoteText = document.getElementById("quoteText");
+    const quoteAuthor = document.getElementById("quoteAuthor");
+
+    // Fade out
+    document.querySelector('.quote-box').style.opacity = 0;
+
+    setTimeout(() => {
+      // Update quote
+      quoteText.textContent = `“${quotes[currentQuote].text}”`;
+      quoteAuthor.textContent = `— ${quotes[currentQuote].author}`;
+
+      // Fade in
+      document.querySelector('.quote-box').style.opacity = 1;
+
+      // Move to next
+      currentQuote = (currentQuote + 1) % quotes.length;
+    }, 1000); // Wait 1 second before changing quote
+  }
+
+  // Start rotating every 6 seconds
+  setInterval(showNextQuote, 6000);
+</script>
 </script>
 
 
