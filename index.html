@@ -489,6 +489,87 @@
 	  }
 	}
 
+	  .book-gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 1.5rem;
+  padding: 2rem;
+}
+
+.book-card {
+  cursor: pointer;
+  overflow: hidden;
+  border-radius: 8px;
+  box-shadow: 0 0 15px rgba(0,0,0,0.3);
+  transition: transform 0.3s ease;
+}
+
+.book-card img {
+  width: 100%;
+  height: auto;
+  display: block;
+  transition: transform 0.3s ease;
+}
+
+.book-card:hover img {
+  transform: scale(1.05);
+}
+
+/* Modal Styles */
+.modal {
+  display: none; 
+  position: fixed;
+  z-index: 9999;
+  padding-top: 80px;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0,0,0,0.85);
+}
+
+.modal-content {
+  background-color: #1a1a1a;
+  margin: auto;
+  padding: 2rem;
+  border-radius: 10px;
+  max-width: 600px;
+  color: #f5f5f5;
+  box-shadow: 0 0 30px rgba(0,0,0,0.8);
+  animation: fadeIn 0.3s ease-out;
+}
+
+.modal-content img {
+  max-width: 100%;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+}
+
+.modal-content h3 {
+  margin-top: 0;
+  color: #99ccff;
+}
+
+.close {
+  color: #ccc;
+  float: right;
+  font-size: 2rem;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.close:hover {
+  color: #ffffff;
+}
+
+@keyframes fadeIn {
+  from {opacity: 0; transform: translateY(20px);}
+  to {opacity: 1; transform: translateY(0);}
+}
+
+
+
 
   </style>
 </head>
@@ -504,6 +585,7 @@
 		<a href="javascript:changePage(3);">Books</a>
 		<a href="javascript:changePage(4);">Members</a>
 		<a href="javascript:changePage(5);">Events</a>
+		<a href="javascript:changePage(6);">Archive</a>
     </div>
   </nav>
 
@@ -638,8 +720,41 @@ So go ahead, don’t be shy — give it a click and see what’s coming up next.
 		  <h1 style="padding-left:15px;">TIMELINE: Coming Soon!</h1>
  </section>
   </div>
-	
-  <div class="page"></div>
+	<!--Book Page-->
+  <div class="page">
+	  <div class="book-gallery">
+  <div class="book-card" onclick="openModal(this)" 
+       data-title="The Book Thief"
+       data-author="Markus Zusak"
+       data-date="Sep 2025"
+       data-rating="★★★★★"
+       data-description="A gripping story narrated by Death during WWII.">
+    <img src="https://example.com/book-cover.jpg" alt="The Book Thief">
+  </div>
+
+  <!-- Duplicate the .book-card block with different data for more books -->
+</div>
+<div id="bookModal" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeModal()">&times;</span>
+    <img id="modalImage" src="" alt="Book Cover">
+    <h3 id="modalTitle"></h3>
+    <p><strong>Author:</strong> <span id="modalAuthor"></span></p>
+    <p><strong>Date:</strong> <span id="modalDate"></span></p>
+    <p><strong>Rating:</strong> <span id="modalRating"></span></p>
+    <p><strong>Description:</strong></p>
+    <p id="modalDescription"></p>
+  </div>
+</div>
+
+
+<!-- Modal Structure -->
+<div id="bookModal" class="modal" onclick="closeModal()">
+  <span class="close">&times;</span>
+  <img class="modal-content" id="modalImg">
+</div>
+
+  </div>
   <!-- Members -->
     <div class="page">
       <div class="cover-section4 hero-darkened fade-in">
@@ -740,6 +855,30 @@ So go ahead, don’t be shy — give it a click and see what’s coming up next.
     &copy; 2025 Fairview Homeschoolers Book Club. All rights reserved.
   </footer>
 <script>
+	/** Modal books **/
+	 <script>
+  function openModal(card) {
+    document.getElementById('modalImage').src = card.querySelector('img').src;
+    document.getElementById('modalTitle').textContent = card.dataset.title;
+    document.getElementById('modalAuthor').textContent = card.dataset.author;
+    document.getElementById('modalDate').textContent = card.dataset.date;
+    document.getElementById('modalRating').textContent = card.dataset.rating;
+    document.getElementById('modalDescription').textContent = card.dataset.description;
+    document.getElementById('bookModal').style.display = "block";
+  }
+
+  function closeModal() {
+    document.getElementById('bookModal').style.display = "none";
+  }
+
+  // Optional: Close modal on outside click
+  window.onclick = function(event) {
+    if (event.target == document.getElementById('bookModal')) {
+      closeModal();
+    }
+  }
+</script>
+
   /** Tab Functions by Blue Snow**/
   var page = document.getElementsByClassName('page');
 		
