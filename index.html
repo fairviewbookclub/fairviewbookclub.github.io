@@ -107,6 +107,19 @@
       text-align: center;
     }
 
+	.cover-section3 {
+      position: relative;
+      height: 400px;
+      background-image:url("https://media.tenor.com/dN2lCFs-aEQAAAAM/book-adventures.gif");
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+    }
+
      .cover-section4 {
       position: relative;
       height: 400px;
@@ -121,6 +134,8 @@
     }
 
     .cover-section h1,
+	.cover-section2 h1,
+	.cover-section3 h1,
 	.cover-section4 h1{
       background-color: rgba(0, 0, 0, 0.4); /* translucent black overlay */
       color: #ffffff;
@@ -722,16 +737,59 @@ So go ahead, don’t be shy — give it a click and see what’s coming up next.
   </div>
 	<!--Book Page-->
   <div class="page">
+	  <div class="cover-section3 hero-darkened fade-in">
+    <h1 class="fade-in" >Book Archive</h1>
+  </div>
+	   <section class="homepage-content fade-in">
+   <h1 class="fade-in">What is This></h1>
+    <img class="home-images left fade-in" src="https://github.com/fairviewbookclub/fairviewbookclub.github.io/blob/main/anna-popplewell-susan-pevensie-peter-pevensie-lucy-pevensie-the-chronicles-of-narnia-prince-caspian-anna-popplewell-b0b7dbdff110c92a382470121260546c.png?raw=true" width="200px">
+    <p class="fade-in">This is the Book Club's archive, in which all our past books are stored. You can find the online links to the book, member ratings, member quotes and the overview of each book. Happy reading!</p>
+
+ </section>
 	  <div class="book-gallery">
-  <div class="book-card" onclick="openModal(this)" 
+		  <!-- The Book Theif-->
+  <div class="book-card fade-in" onclick="openModal(this)" 
        data-title="The Book Thief"
        data-author="Markus Zusak"
-       data-date="Sep 2025"
+       data-date="March - April 2025"
+       data-rating="★★★★"
+       data-description="A gripping story narrated by Death during WWII."
+	   data-quote="Heartbreaking, but fun to read. - Def Noa">
+    <img class="fade-in" src="https://m.media-amazon.com/images/I/91ndEtx1uWL._UF1000,1000_QL80_.jpg" alt="The Book Thief">
+  </div>
+		  <div class="book-card fade-in" onclick="openModal(this)" 
+       data-title="Land of Stories: The Wishing Spell"
+       data-author="Chris Colfer"
+       data-date="April - May 2025"
+       data-rating="★★★★"
+       data-description="The Land of Stories about two siblings who fall into a fairy-tale world! Alex and Conner Bailey's world is about to change, in this fast-paced adventure that uniquely combines our modern day world with the enchanting realm of classic fairy tales."
+	   data-quote="It was awesome! - Yoda">
+	   
+    <img class="fade-in" src="https://upload.wikimedia.org/wikipedia/en/8/81/The_Land_of_Stories.jpg" alt="Land of Stories: The Wishing Spell">
+  </div>
+		  <div class="book-card fade-in" onclick="openModal(this)" 
+       data-title="Mistmantle Chronicles"
+       data-author="M. I. McAllister"
+       data-date="May - June 2025"
        data-rating="★★★★★"
-       data-description="A gripping story narrated by Death during WWII.">
-    <img src="https://example.com/book-cover.jpg" alt="The Book Thief">
+       data-description="The Mistmantle Chronicles is a series of children's novels by M. I. McAllister about anthropomorphic squirrels, hedgehogs, otters, and moles. The protagonist is a pale, honey-coloured Eurasian red squirrel named Urchin."
+	   data-quote="Love the animals! - Yumi">
+	   
+    <img class="fade-in" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQwlBYwYgkkedB__aPN3fds355Y0w4rISMEHw&s" alt="Mistmantle Chronicles">
   </div>
 
+		  <div class="book-card fade-in" onclick="openModal(this)" 
+       data-title="The Fellowship of the Ring"
+       data-author="J. K. Tolkein"
+       data-date="June - July 2025"
+       data-rating="★★★★★"
+       data-description="The Lord of the Rings plot begins when Frodo Baggins inherits a magical ring from his uncle Bilbo, which is revealed to be the One Ring of power created by the dark lord Sauron. Frodo and eight companions form the Fellowship of the Ring and embark on a quest to destroy it in Mount Doom."
+	   data-quote="This is Great - Isaac">
+	   
+    <img class="fade-in" src="https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1566425108i/33.jpg" alt="Mistmantle Chronicles">
+  </div>
+
+ <img class="home-images left fade-in" src="https://github.com/fairviewbookclub/fairviewbookclub.github.io/blob/main/5bbbb2967bb19-1489371d1bd206f197c46317d7f1840f.png?raw=true" width="300px">
   <!-- Duplicate the .book-card block with different data for more books -->
 </div>
 <div id="bookModal" class="modal">
@@ -863,6 +921,7 @@ So go ahead, don’t be shy — give it a click and see what’s coming up next.
     document.getElementById('modalAuthor').textContent = card.dataset.author;
     document.getElementById('modalDate').textContent = card.dataset.date;
     document.getElementById('modalRating').textContent = card.dataset.rating;
+	  document.getElementById('modalQuote').textContent = card.dataset.quote;
     document.getElementById('modalDescription').textContent = card.dataset.description;
     document.getElementById('bookModal').style.display = "block";
   }
