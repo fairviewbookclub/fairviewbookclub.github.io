@@ -149,7 +149,6 @@
     .home-images {
       display: flex;
       max-width: 350px;
-      border-radius: 20px;
       box-shadow: 0 0 15px rgba(0, 0, 0, 0.4);
     }
     .left{
@@ -424,37 +423,6 @@
 	  }
 	}
 
-	.side-decor-left, .side-decor-right {
-	  position: relative; /* or static */
-	  width: 240px; /* width of visible part */
-	  height: 400px; /* or image height */
-	  overflow: hidden;
-	}
-
-	.side-decor-left {
-	  float: left; /* or position: relative and left: 0 */
-	  margin-right: 20px; /* spacing from content */
-	}
-	
-	.side-decor-left img {
-	  position: relative;
-	  left: -160px; /* shift left image left by the hidden amount */
-	  width: 400px;
-	  height: auto;
-	}
-	
-	.side-decor-right {
-	  float: right; /* or position: relative and right: 0 */
-	  margin-left: 20px;
-	}
-	
-	.side-decor-right img {
-	  position: relative;
-	  right: -160px; /* shift right image right by the hidden amount */
-	  width: 400px;
-	  height: auto;
-	}
-
 /* Button esponsiveness */
 	@media (max-width: 768px) {
 	  .button {
@@ -490,7 +458,7 @@
   <!-- Content Sections -->
  <section class="homepage-content fade-in">
    <h1 class="fade-in">Who are We?</h1>
-    <img class="home-images right fade-in" src="https://github.com/fairviewbookclub/fairviewbookclub.github.io/blob/main/541511684_1992737948153693_1209059574442405965_n.jpg?raw=true">
+    <img class="home-images left fade-in" src="https://github.com/fairviewbookclub/fairviewbookclub.github.io/blob/main/ijl1k1b46kg781ju8p2o41pu97-952c8add5973bcc157f2c43951e49d64.png?raw=true">
     <p class="fade-in">We are a humble band of homeschoolers who simply love to read. Brought together by a shared curiosity and a love for stories, we meet regularly to connect, chat, and journey through books that spark imagination and thoughtful conversation.</p>
 <p class="fade-in">
 Sometimes we explore timeless classics like <em>Pride and Prejudice</em>, and other times we dive into famous modern reads like <em>Brave</em> or <em>Land of Stories</em>. Whatever the book, each one brings fresh ideas to consider, in which we can discuss as a group, while having fun with it!</p>
@@ -498,10 +466,7 @@ Sometimes we explore timeless classics like <em>Pride and Prejudice</em>, and ot
 Our book club is created by and for homeschoolers in Fairview, and it’s open to all who enjoy reading and sharing that joy with others. Whether you're a seasoned bookworm or just starting to fall in love with reading, you’re welcome here.</p>
 	 <button onClick="javascript:changePage(2);" class="button fade-in"><span>Learn More </span></button>
  </section>
-	  <!--- Harry Potter Decor -->
-	  <div class="side-decor-left fade-in">
-    <img src="https://github.com/fairviewbookclub/fairviewbookclub.github.io/blob/main/ijl1k1b46kg781ju8p2o41pu97-952c8add5973bcc157f2c43951e49d64.png?raw=true" alt="Potter decoration">
-  </div>
+	 
 	  <div class="books-container">
 <section class="current-book fade-in ">
   <h2>Current Monthly Book</h2>
@@ -531,10 +496,7 @@ Our book club is created by and for homeschoolers in Fairview, and it’s open t
 </section>
 	  </div>
   
-   <!--- Repechieep -->
-	  <div class="side-decor-right fade-in">
-    <img src="https://github.com/fairviewbookclub/fairviewbookclub.github.io/blob/main/reepicheep-edmund-pevensie-aslan-eustace-scrubb-the-chronicles-of-narnia-lethal-998501b307c48f1e814fdf1d1e6afcd3.png?raw=true" alt="Reep decoration">
-  </div>
+	  <img class="home-images right fade-in" src="https://github.com/fairviewbookclub/fairviewbookclub.github.io/blob/main/reepicheep-edmund-pevensie-aslan-eustace-scrubb-the-chronicles-of-narnia-lethal-998501b307c48f1e814fdf1d1e6afcd3.png?raw=true">
     <br><br>
     <!-- Club Stats Section -->
 <section class="stats-section fade-in">
@@ -580,8 +542,8 @@ So go ahead, don’t be shy — give it a click and see what’s coming up next.
 
 	 <button onClick="javascript:changePage(5);" class="button fade-in"><span>Events </span></button>
  </section>
-	   <div class="side-decor-left fade-in">
-    <img src="https://github.com/fairviewbookclub/fairviewbookclub.github.io/blob/main/aslan-lion-desktop-wallpaper-download-lion-d14cd90631f82fce6613dd53693c5253.png?raw=true" style="transform: scaleX(-1);" alt="Aslan decoration">
+	 
+		   <img class="home-images right fade-in" src="https://github.com/fairviewbookclub/fairviewbookclub.github.io/blob/main/aslan-lion-desktop-wallpaper-download-lion-d14cd90631f82fce6613dd53693c5253.png?raw=true" style="transform: scaleX(-1);" alt="Aslan decoration">
   </div>
   </div>
 
