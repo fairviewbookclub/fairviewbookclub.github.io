@@ -581,8 +581,37 @@
         from {opacity: 0; transform: translateY(20px);}
         to {opacity: 1; transform: translateY(0);}
       }
+      
+      /* Theme Toggle Button */
+    #theme-toggle {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background-color: #1A1A1A;
+      border: none;
+      border-radius: 50%;
+      padding: 12px;
+      cursor: pointer;
+      z-index: 1000;
+      box-shadow: 0 0 10px rgba(0,0,0,0.5);
+      transition: background-color 0.3s ease;
+    }
+
+    #theme-toggle:hover {
+      background-color: #333;
+    }
+
+    #theme-toggle img {
+      width: 24px;
+      height: 24px;
+      filter: invert(100%);
+      transition: filter 0.3s ease;
+    }
+
 
 	/* Light Mode Styles */
+    
+    
 	body.light-mode {
 	  background-color: #f5f5f5;
 	  color: #121212;
@@ -598,7 +627,7 @@
 	}
 	
 	body.light-mode nav a:hover {
-	  color: #000080;
+	  color: #ffffff;
 	}
 	
 	body.light-mode .homepage-content,
@@ -1019,7 +1048,7 @@ So go ahead, don’t be shy — give it a click and see what’s coming up next.
   </footer>
 	<!-- Light / Dark funstion -->
 	<button id="theme-toggle" aria-label="Toggle theme">
-  <img id="theme-icon" src="https://www.svgrepo.com/show/345010/moon-stars.svg" alt="Toggle Theme" />
+  <img id="theme-icon" src="https://www.svgrepo.com/show/215050/sunset.svg" alt="Toggle Theme" />
 </button>
 
 <script>
@@ -1042,11 +1071,11 @@ So go ahead, don’t be shy — give it a click and see what’s coming up next.
     if (theme === 'dark') {
       document.body.classList.add('dark-mode');
       document.body.classList.remove('light-mode');
-      icon.src = 'https://www.svgrepo.com/show/345010/moon-stars.svg';
+      icon.src = 'https://www.svgrepo.com/show/215050/sunset.svg';
     } else {
       document.body.classList.add('light-mode');
       document.body.classList.remove('dark-mode');
-      icon.src = 'https://www.svgrepo.com/show/494071/sun.svg';
+      icon.src = 'https://www.svgrepo.com/show/345010/moon-stars.svg';
     }
   }
 	/** Modal books **/
@@ -1241,5 +1270,3 @@ document.addEventListener('DOMContentLoaded', () => {
 </script>
 </body>
 </html>
-
-
