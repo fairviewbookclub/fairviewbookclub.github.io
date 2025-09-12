@@ -258,7 +258,7 @@
       font-size: 1.2rem;
       color: #ddd;
     }
-	  
+	/* Current and Past Books style */
 	.books-container {
 	  display: flex;
 	  justify-content: center;
@@ -301,7 +301,7 @@
     }
 
 	
-
+/* Webpage button style */
 	.button {
 	  border-radius: 4px;
 	  background-color: #99ccff;
@@ -602,7 +602,7 @@
 		<a href="javascript:changePage(6);">Archive</a>
     </div>
   </nav>
-
+<!--------------------------------          HOME PAGE                 ------------------------------->
   <div class="page">
   <!-- Cover Section -->
   <div class="cover-section hero-darkened fade-in">
@@ -701,7 +701,7 @@ So go ahead, don’t be shy — give it a click and see what’s coming up next.
 		   
   </div>
   </div>
-
+<!--------------------------------          ABOUT US PAGE                ------------------------------->
   <div class="page">
 	  <div class="cover-section2 hero-darkened fade-in">
     <h1 class="fade-in" >About Us</h1>
@@ -734,7 +734,7 @@ So go ahead, don’t be shy — give it a click and see what’s coming up next.
 		  <h1 style="padding-left:15px;">TIMELINE: Coming Soon!</h1>
  </section>
   </div>
-	<!--Book Page-->
+	<!--------------------------------          BOOK PAGE                 ------------------------------->
   <div class="page">
 	  <div class="cover-section3 hero-darkened fade-in">
     <h1 class="fade-in" >Book Archive</h1>
@@ -753,7 +753,8 @@ So go ahead, don’t be shy — give it a click and see what’s coming up next.
        data-author="Markus Zusak"
        data-date="March - April 2025"
        data-rating="★★★★"
-       data-description="A gripping story narrated by Death during WWII."
+	   data-quotes=" ''War makes me sad, but this is a great read'' - Def Noa"
+       data-description="The Book Thief is a story narrated by Death, following a young German girl, Liesel Meminger, during World War II. Sent to live with foster parents Hans and Rosa Hubermann, Liesel's life revolves around the power of words and books, which she often steals. Her family hides a Jewish man, Max Vandenburg, in their basement, creating a bond between Liesel and Max. The story culminates with a devastating air raid that kills Liesel's foster parents and best friend, Rudy Steiner, but Liesel survives, later reuniting with Max and eventually moving to Australia where she lives a long life. "
 	  >
     <img class="fade-in" src="https://m.media-amazon.com/images/I/91ndEtx1uWL._UF1000,1000_QL80_.jpg" alt="The Book Thief">
   </div>
@@ -762,6 +763,7 @@ So go ahead, don’t be shy — give it a click and see what’s coming up next.
        data-author="Chris Colfer"
        data-date="April - May 2025"
        data-rating="★★★★"
+	   data-quotes=" ''My new fave book!'' - Iris"
        data-description="The Land of Stories about two siblings who fall into a fairy-tale world! Alex and Conner Bailey's world is about to change, in this fast-paced adventure that uniquely combines our modern day world with the enchanting realm of classic fairy tales."
 	   >
 	   
@@ -772,6 +774,7 @@ So go ahead, don’t be shy — give it a click and see what’s coming up next.
        data-author="M. I. McAllister"
        data-date="May - June 2025"
        data-rating="★★★★★"
+	   data-quotes=" ''The Animals talking were awesome.'' - Isaac"
        data-description="The Mistmantle Chronicles is a series of children's novels by M. I. McAllister about anthropomorphic squirrels, hedgehogs, otters, and moles. The protagonist is a pale, honey-coloured Eurasian red squirrel named Urchin."
 	   >
 	   
@@ -783,16 +786,17 @@ So go ahead, don’t be shy — give it a click and see what’s coming up next.
        data-author="J. K. Tolkein"
        data-date="June - July 2025"
        data-rating="★★★★★"
+	   data-quotes=" ''Love it!'' - Yumi"
        data-description="The Lord of the Rings plot begins when Frodo Baggins inherits a magical ring from his uncle Bilbo, which is revealed to be the One Ring of power created by the dark lord Sauron. Frodo and eight companions form the Fellowship of the Ring and embark on a quest to destroy it in Mount Doom."
 	  >
 	   
     <img class="fade-in" src="https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1566425108i/33.jpg" alt="Mistmantle Chronicles">
   </div>
 
- <img class="home-images left fade-in" src="https://github.com/fairviewbookclub/fairviewbookclub.github.io/blob/main/5bbbb2967bb19-1489371d1bd206f197c46317d7f1840f.png?raw=true" width="300px">
+ <img class="home-images left fade-in" src="https://github.com/fairviewbookclub/fairviewbookclub.github.io/blob/main/lucy-maud-montgomery-l-m-montgomery-s-anne-of-green-gables-anne-of-avonlea-anne-shirley-anne-of-green-gables-3f4ec5a063f641eecd795700790a3405.png?raw=true" width="300px">
   <!-- Duplicate the .book-card block with different data for more books -->
 </div>
-	  <img class="home-images left fade-in" src="https://github.com/fairviewbookclub/fairviewbookclub.github.io/blob/main/5bbbb2967bb19-1489371d1bd206f197c46317d7f1840f.png?raw=true" width="300px">
+	 
 <div id="bookModal" class="modal">
   <div class="modal-content">
     <span class="close" onclick="closeModal()">&times;</span>
@@ -801,6 +805,7 @@ So go ahead, don’t be shy — give it a click and see what’s coming up next.
     <p><strong>Author:</strong> <span id="modalAuthor"></span></p>
     <p><strong>Date:</strong> <span id="modalDate"></span></p>
     <p><strong>Rating:</strong> <span id="modalRating"></span></p>
+	<p><strong>Member Quotes:</strong> <span id="modalQuotes"></span></p>
     <p><strong>Description:</strong></p>
     <p id="modalDescription"></p>
   </div>
@@ -922,6 +927,7 @@ So go ahead, don’t be shy — give it a click and see what’s coming up next.
     document.getElementById('modalAuthor').textContent = card.dataset.author;
     document.getElementById('modalDate').textContent = card.dataset.date;
     document.getElementById('modalRating').textContent = card.dataset.rating;
+	document.getElementById('modalQuotes').textContent = card.dataset.quotes;
     document.getElementById('modalDescription').textContent = card.dataset.description;
     document.getElementById('bookModal').style.display = "block";
   }
