@@ -1023,6 +1023,146 @@
     z-index: 10;
   }
 
+/* Filter Controls Section */
+.filter-controls {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin: 1.5rem 0;
+  flex-wrap: wrap;
+  background-color: #1A1A1A;
+  padding: 1rem;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.3);
+}
+
+.filter-controls label {
+  font-weight: 600;
+  font-family: 'Montserrat Alternates', sans-serif;
+}
+
+.filter-controls select,
+#clearFilters {
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  border-radius: 6px;
+  border: none;
+  background-color: #2a2a2a;
+  color: #f5f5f5;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.filter-controls select:hover,
+#clearFilters:hover {
+  background-color: #3a3a3a;
+  cursor: pointer;
+}
+
+#clearFilters {
+  background-color: #99ccff;
+  color: #121212;
+  font-weight: bold;
+}
+
+#clearFilters:hover {
+  background-color: #cce6ff;
+  color: #000;
+}
+
+/* Meetup Entry Styling */
+.meetup-entry {
+  background-color: #1A1A1A;
+  border-left: 4px solid #99ccff;
+  padding: 1.5rem;
+  margin: 1rem 0;
+  border-radius: 8px;
+  box-shadow: 0 0 12px rgba(0,0,0,0.2);
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.meetup-entry h3 {
+  font-size: 1.6rem;
+  color: #99ccff;
+  font-family: 'Montserrat Alternates', sans-serif;
+  margin-bottom: 0.5rem;
+}
+
+.meetup-entry p {
+  font-size: 1rem;
+  color: #ddd;
+  margin-bottom: 1rem;
+}
+
+.meetup-entry button {
+  background-color: #000080;
+  color: #fff;
+  padding: 0.6rem 1.2rem;
+  border: none;
+  border-radius: 6px;
+  font-size: 1rem;
+  font-family: 'Work Sans', sans-serif;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.meetup-entry button:hover {
+  background-color: #000066;
+}
+
+/* Light Mode */
+body.light-mode .filter-controls {
+  background-color: #fff;
+  box-shadow: 0 0 8px rgba(0,0,0,0.1);
+}
+
+body.light-mode .filter-controls select,
+body.light-mode #clearFilters {
+  background-color: #f0f0f0;
+  color: #121212;
+}
+
+body.light-mode .filter-controls select:hover,
+body.light-mode #clearFilters:hover {
+  background-color: #e0e0e0;
+}
+
+body.light-mode .meetup-entry {
+  background-color: #fff;
+  border-left-color: #000080;
+  box-shadow: 0 0 12px rgba(0,0,0,0.1);
+}
+
+body.light-mode .meetup-entry h3 {
+  color: #000080;
+}
+
+body.light-mode .meetup-entry p {
+  color: #333;
+}
+
+body.light-mode .meetup-entry button {
+  background-color: #000080;
+  color: #fff;
+}
+
+body.light-mode .meetup-entry button:hover {
+  background-color: #000066;
+}
+
+/* Responsive for mobile */
+@media (max-width: 600px) {
+  .filter-controls {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+
+  .meetup-entry {
+    padding: 1rem;
+  }
+}
+
+
 
   </style>
 </head>
