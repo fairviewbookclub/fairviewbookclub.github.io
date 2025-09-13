@@ -32,6 +32,37 @@
 	  transition: opacity 0.3s ease;
 	}
     
+    
+
+    /* Fade-in animation (if you want to keep fade-in) */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(10px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+
+    .fade-in.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Responsive */
+    @media (max-width: 600px) {
+      #eventsArchivePage {
+        padding: 15px;
+      }
+
+      .filter-controls {
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .event-entry {
+        padding: 15px;
+      }
+    }
+
+    
     #back-to-top {
       position: fixed;
       bottom: 20px;
@@ -335,9 +366,9 @@
     /* Default for desktop */
     .current-book {
       padding: 10px;
-      max-width: 50%;
+      max-width: 45%;
       display: grid;
-      grid-template-columns: 180px 1fr;
+      
       align-items: center;
       gap: 1rem;
       background-color: #1A1A1A;
@@ -352,7 +383,7 @@
     }
 
     .book-info {
-      max-width: 480px;
+      max-width: 550px;
       word-wrap: break-word;
       overflow-wrap: break-word;
     }
@@ -363,9 +394,6 @@
       margin-bottom: 0.5rem;
     }
 
-    .book-info p {
-      margin: 0.5rem 0;
-    }
 
     /* Responsive tweaks for small screens */
     @media (max-width: 700px) {
@@ -879,6 +907,123 @@
     color: #333;
     user-select: none;
   }
+  
+  /* Events Section */
+  .event-entry {
+    background-color: var(--card-bg, #f9f9f9);
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    transition: transform 0.2s;
+  }
+
+  .event-entry:hover {
+    transform: translateY(-2px);
+  }
+
+  .event-entry h3 {
+    margin-top: 0;
+    color: #444;
+  }
+
+  .event-entry p {
+    margin: 0.5rem 0;
+    line-height: 1.6;
+  }
+
+  .photos-btn {
+    margin-top: 1rem;
+    padding: 0.6rem 1.2rem;
+    font-size: 0.95rem;
+    background-color: #0077cc;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+
+  .photos-btn:hover {
+    background-color: #005fa3;
+  }
+  
+    /* Slideshow Modal */
+  .photo-modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    background-color: rgba(0, 0, 0, 0.9);
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    box-sizing: border-box;
+  }
+
+  .photo-modal.show {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .photo-modal-content {
+    max-width: 100%;
+    max-height: 100%;
+    text-align: center;
+    position: relative;
+    color: #fff;
+  }
+
+  .photo-modal img {
+    max-width: 90vw;
+    max-height: 70vh;
+    border-radius: 8px;
+    object-fit: contain;
+  }
+
+  .photo-controls {
+    margin-top: 20px;
+  }
+
+  .photo-controls button {
+    background: rgba(255, 255, 255, 0.15);
+    color: #fff;
+    border: none;
+    padding: 10px 18px;
+    margin: 0 10px;
+    cursor: pointer;
+    font-size: 16px;
+    border-radius: 5px;
+    transition: background 0.3s ease;
+  }
+
+  .photo-controls button:hover {
+    background: rgba(255, 255, 255, 0.35);
+  }
+
+  #modalCaption {
+    margin-top: 15px;
+    font-style: italic;
+    font-size: 14px;
+    color: #ccc;
+  }
+
+  .close-btn {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    font-size: 30px;
+    color: white;
+    cursor: pointer;
+    z-index: 10;
+  }
+
+
   </style>
 </head>
 
@@ -1217,7 +1362,59 @@ So go ahead, don’t be shy — give it a click and see what’s coming up next.
   <div class="card-grid">
 
     </div>
+
+	
 </section>
+	</div>
+    
+	<div class="page">
+		 <h2>Events Archive</h2>
+
+  <div class="filter-controls">
+  <label for="filterYear">Year:</label>
+  <select id="filterYear">
+    <option value="">All</option>
+    <option value="2025">2025</option>
+    <option value="2024">2024</option>
+    <!-- add more years as needed -->
+  </select>
+
+  <label for="filterMonth">Month:</label>
+  <select id="filterMonth">
+    <option value="">All</option>
+    <option value="01">January</option>
+    <option value="02">February</option>
+    <!-- etc. -->
+  </select>
+
+  <button id="clearFilters">Clear Filters</button>
+</div>
+
+
+  <!-- Meetup Entries -->
+<div class="meetup-entry" data-year="2025" data-month="08">
+  <h3>August 2025 Meetup</h3>
+  <p><strong>Theme:</strong> Sci-Fi Night</p>
+  <button onclick="openPhotoModal('august')">View Photos</button>
+</div>
+
+<div class="meetup-entry" data-year="2025" data-month="07">
+  <h3>July 2025 Meetup</h3>
+  <p><strong>Theme:</strong> Mystery Hour</p>
+  <button onclick="openPhotoModal('july')">View Photos</button>
+</div>
+
+<!-- Sample for another month, commented out -->
+<!--
+<div class="meetup-entry" data-year="2025" data-month="09">
+  <h3>September 2025 Meetup</h3>
+  <p><strong>Theme:</strong> Fantasy Worlds</p>
+  <button onclick="openPhotoModal('september')">View Photos</button>
+</div>
+-->
+
+
+
 	</div>
   <!-- Footer -->
   <footer>
@@ -1231,6 +1428,29 @@ So go ahead, don’t be shy — give it a click and see what’s coming up next.
   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
     <polyline points="18 15 12 9 6 15"></polyline>
   </svg>
+
+
+<!-- Trigger Button (optional elsewhere) -->
+<!-- <button onclick="openPhotoModal('august')">View Meetup Photos</button> -->
+
+<!-- Photo Slideshow Modal -->
+<div id="photoModal" class="photo-modal">
+  <span class="close-modal" onclick="closePhotoModal()">&times;</span>
+
+  <div class="photo-content">
+    <button class="prev" onclick="prevSlide()">&#10094;</button>
+
+    <div class="photo-inner">
+      <img id="modalImg" src="" alt="Meetup Photo" />
+      <p id="modalCaption" class="caption"></p>
+    </div>
+
+    <button class="next" onclick="nextSlide()">&#10095;</button>
+  </div>
+</div>
+
+
+
 
 <script>
 	/** Back to Top **/
@@ -1525,6 +1745,78 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     observer.observe(progressTracker);
+  });
+  
+  document.addEventListener('DOMContentLoaded', () => {
+    const filterYear = document.getElementById('filter-year');
+    // const filterMonth = document.getElementById('filter-month');
+    const events = document.querySelectorAll('.event-entry');
+
+    function filterEvents() {
+      const year = filterYear.value;
+      // const month = filterMonth.value;
+
+      events.forEach(event => {
+        const eventYear = event.dataset.year;
+        // const eventMonth = event.dataset.month;
+
+        const yearMatch = (year === 'all') || (eventYear === year);
+        // const monthMatch = (month === 'all') || (eventMonth === month);
+
+        event.style.display = (yearMatch) ? 'block' : 'none';
+      });
+    }
+
+    filterYear.addEventListener('change', filterEvents);
+    // filterMonth.addEventListener('change', filterEvents);
+
+    // Initialize filter on page load
+    filterEvents();
+    
+    
+  const photoData = {
+  august: [
+    { src: 'august1.jpg', caption: 'Group photo at the library' },
+    { src: 'august2.jpg', caption: 'Discussing Dune' },
+  ],
+  july: [
+    { src: 'july1.jpg', caption: 'Mystery book stack' },
+    { src: 'july2.jpg', caption: 'Tea & discussion' },
+  ]
+};
+
+let currentPhotos = [];
+let currentSlideIndex = 0;
+
+function openPhotoModal(key) {
+  currentPhotos = photoData[key];
+  currentSlideIndex = 0;
+  showSlide();
+  document.getElementById('photoModal').style.display = 'block';
+}
+
+function closePhotoModal() {
+  document.getElementById('photoModal').style.display = 'none';
+}
+
+function nextSlide() {
+  currentSlideIndex = (currentSlideIndex + 1) % currentPhotos.length;
+  showSlide();
+}
+
+function prevSlide() {
+  currentSlideIndex = (currentSlideIndex - 1 + currentPhotos.length) % currentPhotos.length;
+  showSlide();
+}
+
+function showSlide() {
+  const modalImg = document.getElementById('modalImg');
+  const modalCaption = document.getElementById('modalCaption');
+
+  modalImg.src = currentPhotos[currentSlideIndex].src;
+  modalCaption.textContent = currentPhotos[currentSlideIndex].caption;
+}
+
   });
 </script>
 </body>
