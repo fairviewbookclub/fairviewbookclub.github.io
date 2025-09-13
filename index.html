@@ -17,10 +17,54 @@
       margin: 0;
       padding: 0;
       background-color: #121212; /* Very dark gray */
+	  transition: background-color 0.5s ease, color 0.5s ease;
       color: #f5f5f5; /* Soft white for dark mode */
       line-height: 1.6;
 	  overflow-x: hidden; /* Prevents x-overflow*/
     }
+	  /*Transition to light/dark*/
+	.card, .modal, .button, .quote-box {
+	  transition: background-color 0.5s ease, color 0.5s ease, border-color 0.5s ease;
+	}
+	  
+	body.theme-fade {
+	  opacity: 0;
+	  transition: opacity 0.3s ease;
+	}
+    
+    #back-to-top {
+      position: fixed;
+      bottom: 20px;
+      left: 20px;
+      background-color: var(--button-bg, #333);
+      color: var(--button-color, #fff);
+      border: none;
+      border-radius: 50%;
+      width: 48px;
+      height: 48px;
+      cursor: pointer;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+      transition: background-color 0.3s ease, opacity 0.3s ease;
+      opacity: 0.7;
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+  }
+
+  #back-to-top svg {
+    width: 24px;
+    height: 24px;
+    stroke: currentColor;
+  }
+
+  #back-to-top:hover {
+    opacity: 1;
+    background-color: var(--button-hover-bg, #555);
+  }
+
+
+
  /* Lenis Scroll Styling */
         html.lenis {
           height: auto;
@@ -46,6 +90,26 @@
         opacity: 1;
         transform: translateY(0);
       }
+	  
+	  /*Page Styling */
+	.page {
+	  opacity: 0;
+	  visibility: hidden;
+	  transform: translateY(20px);
+	  transition: opacity 0.5s ease, transform 0.5s ease, visibility 0s linear 0.5s;
+	  position: absolute;
+	  width: 100%;
+	}
+	
+	.page.active {
+	  opacity: 1;
+	  visibility: visible;
+	  transform: translateY(0);
+	  transition-delay: 0s;
+	  position: relative;
+	}
+
+
 
     h1, h2, h3, nav {
       font-family: 'Montserrat Alternates', sans-serif;
@@ -258,46 +322,74 @@
       font-size: 1.2rem;
       color: #ddd;
     }
-	/* Current and Past Books style */
-	.books-container {
-	  display: flex;
-	  justify-content: center;
-	  align-items: flex-start;
-	  gap: 2rem;
-	  flex-wrap: wrap; 
-	}
-    
+    /*Current and Past Book*/
+
+    .books-container {
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      gap: 2rem;
+      flex-wrap: wrap; 
+    }
+
+    /* Default for desktop */
     .current-book {
-	  padding:10px;
-	  max-width:50%;
+      padding: 10px;
+      max-width: 50%;
       display: grid;
-      flex-wrap: wrap;
+      grid-template-columns: 180px 1fr;
       align-items: center;
       gap: 1rem;
       background-color: #1A1A1A;
-	  box-sizing: border-box;
-	  border-radius:10px;
+      box-sizing: border-box;
+      border-radius: 10px;
     }
-    
+
     .current-book img {
       width: 180px;
       border-radius: 10px;
-	  align-items: center;
       box-shadow: 0 0 20px rgba(0,0,0,0.4);
     }
-    
+
     .book-info {
       max-width: 480px;
+      word-wrap: break-word;
+      overflow-wrap: break-word;
     }
-    
+
     .book-info h3 {
       font-size: 1.8rem;
       color: #99ccff;
       margin-bottom: 0.5rem;
     }
-    
+
     .book-info p {
       margin: 0.5rem 0;
+    }
+
+    /* Responsive tweaks for small screens */
+    @media (max-width: 700px) {
+      .books-container {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .current-book {
+        max-width: 90%;   /* use most of viewport */
+        grid-template-columns: 1fr; /* stack image + info */
+        padding: 15px;
+      }
+
+      .current-book img {
+        width: 100%;
+        max-width: 300px;
+        margin: 0 auto 1rem;
+        display: block;
+      }
+
+      .book-info {
+        max-width: 100%;
+      }
     }
 
 	
@@ -565,6 +657,23 @@
         color: #99ccff;
       }
 
+      #bookModal {
+        display: none;
+        position: fixed;
+        top: 0; left: 0; right: 0; bottom: 0;
+        background-color: rgba(0, 0, 0, 0.7);
+        backdrop-filter: blur(4px);
+        opacity: 0;
+        transition: opacity 0.3s ease;
+        z-index: 9999;
+        overflow-y: auto;
+      }
+
+      #bookModal.show {
+        opacity: 1;
+      }
+
+
       .close {
         color: #ccc;
         float: right;
@@ -583,7 +692,7 @@
       }
       
       /* Theme Toggle Button */
-    #theme-toggle {
+  	#theme-toggle {
       position: fixed;
       bottom: 20px;
       right: 20px;
@@ -594,7 +703,11 @@
       cursor: pointer;
       z-index: 1000;
       box-shadow: 0 0 10px rgba(0,0,0,0.5);
-      transition: background-color 0.3s ease;
+      transition: background-color 0.3s ease, transform 0.3s ease;
+    }
+
+    #theme-toggle:active {
+      transform: scale(0.9) rotate(15deg);
     }
 
     #theme-toggle:hover {
@@ -607,6 +720,7 @@
       filter: invert(100%);
       transition: filter 0.3s ease;
     }
+
 
 
 	/* Light Mode Styles */
@@ -714,9 +828,57 @@
 	  background-color: #000066;
 	}
 
+	  /* Container for the progress tracker */
+  #progressTracker {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 300px; /* or any width you prefer */
+    margin-top: 20px;
+  }
 
+  /* The progress track bar */
+  #progressBar {
+    position: relative;
+    flex-grow: 1;
+    height: 8px;
+    background: #ddd;
+    border-radius: 4px;
+  }
 
+  /* The star wrapper that moves */
+  #starWrapper {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    transition: left 1.5s ease;
+    width: 30px;
+    height: 30px;
+    pointer-events: none; /* no interaction */
+  }
 
+  /* Star SVG style */
+  #starWrapper svg {
+    width: 100%;
+    height: 100%;
+    fill: gold;
+    filter: drop-shadow(0 0 3px orange);
+    animation: starGlow 2s infinite alternate;
+  }
+
+  @keyframes starGlow {
+    0% { filter: drop-shadow(0 0 3px orange); }
+    100% { filter: drop-shadow(0 0 8px orange); }
+  }
+
+  /* Percent text next to star */
+  #progressPercent {
+    min-width: 40px;
+    font-weight: bold;
+    font-size: 1.1rem;
+    color: #333;
+    user-select: none;
+  }
   </style>
 </head>
 
@@ -752,7 +914,7 @@ Our book club is created by and for homeschoolers in Fairview, and it’s open t
 	 <button onClick="javascript:changePage(2);" class="button fade-in"><span>Learn More </span></button>
  </section>
 	 
-	  <div class="books-container">
+	    <div class="books-container">
 <section class="current-book fade-in ">
   <h2>Current Monthly Book</h2>
   
@@ -761,7 +923,19 @@ Our book club is created by and for homeschoolers in Fairview, and it’s open t
       <h3><em>Harry Potter - The Philosopher's Stone</em> by J.K. Rowling</h3>
       <p>Harry Potter and the Philosopher's Stone is a fantasy novel written by British author J. K. Rowling. It is the first novel in the Harry Potter series and was Rowling's debut novel.</p>
       <p><strong>Next Discussion:</strong> Sept 16, 2025</p>
-      <p><strong>Online Link:</strong> <a href="https://archive.org/details/j.-k.-rowling-1.-harry-potter-and-the-philosophers-stone-2020/mode/2up?view=theater">Archive.org</a></p><br><br>
+      <p><strong>Online Link:</strong> <a href="https://archive.org/details/j.-k.-rowling-1.-harry-potter-and-the-philosophers-stone-2020/mode/2up?view=theater">Archive.org</a></p>
+      
+<div id="progressTracker" aria-label="Reading Progress">
+  <div id="progressBar">
+    <div id="starWrapper" style="left: 0%;">
+      <!-- Star SVG from your link -->
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+        <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/>
+      </svg>
+    </div>
+  </div>
+  <div id="progressPercent">0%</div>
+</div>
     </div>
   
 </section>
@@ -887,7 +1061,7 @@ So go ahead, don’t be shy — give it a click and see what’s coming up next.
 	   data-quotes=" ''War makes me sad, but this is a great read'' - Def Noa"
        data-description="The Book Thief is a story narrated by Death, following a young German girl, Liesel Meminger, during World War II. Sent to live with foster parents Hans and Rosa Hubermann, Liesel's life revolves around the power of words and books, which she often steals. Her family hides a Jewish man, Max Vandenburg, in their basement, creating a bond between Liesel and Max. The story culminates with a devastating air raid that kills Liesel's foster parents and best friend, Rudy Steiner, but Liesel survives, later reuniting with Max and eventually moving to Australia where she lives a long life. "
 	  >
-    <img class="fade-in" src="https://m.media-amazon.com/images/I/91ndEtx1uWL._UF1000,1000_QL80_.jpg" alt="The Book Thief">
+    <img class="fade-in" src="https://m.media-amazon.com/images/I/91ndEtx1uWL._UF1000,1000_QL80_.jpg" alt="The Book Thief" loading="lazy">
   </div>
 		  <div class="book-card fade-in" onclick="openModal(this)" 
        data-title="Land of Stories: The Wishing Spell"
@@ -898,7 +1072,7 @@ So go ahead, don’t be shy — give it a click and see what’s coming up next.
        data-description="The Land of Stories about two siblings who fall into a fairy-tale world! Alex and Conner Bailey's world is about to change, in this fast-paced adventure that uniquely combines our modern day world with the enchanting realm of classic fairy tales."
 	   >
 	   
-    <img class="fade-in" src="https://upload.wikimedia.org/wikipedia/en/8/81/The_Land_of_Stories.jpg" alt="Land of Stories: The Wishing Spell">
+    <img class="fade-in" src="https://upload.wikimedia.org/wikipedia/en/8/81/The_Land_of_Stories.jpg" alt="Land of Stories: The Wishing Spell" loading="lazy">
   </div>
 		  <div class="book-card fade-in" onclick="openModal(this)" 
        data-title="Mistmantle Chronicles"
@@ -909,7 +1083,7 @@ So go ahead, don’t be shy — give it a click and see what’s coming up next.
        data-description="The Mistmantle Chronicles is a series of children's novels by M. I. McAllister about anthropomorphic squirrels, hedgehogs, otters, and moles. The protagonist is a pale, honey-coloured Eurasian red squirrel named Urchin."
 	   >
 	   
-    <img class="fade-in" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQwlBYwYgkkedB__aPN3fds355Y0w4rISMEHw&s" alt="Mistmantle Chronicles">
+    <img class="fade-in" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQwlBYwYgkkedB__aPN3fds355Y0w4rISMEHw&s" alt="Mistmantle Chronicles" loading="lazy">
   </div>
 
 		  <div class="book-card fade-in" onclick="openModal(this)" 
@@ -924,7 +1098,7 @@ So go ahead, don’t be shy — give it a click and see what’s coming up next.
     <img class="fade-in" src="https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1566425108i/33.jpg" alt="Mistmantle Chronicles">
   </div>
 
- <img class="home-images left fade-in" src="https://github.com/fairviewbookclub/fairviewbookclub.github.io/blob/main/lucy-maud-montgomery-l-m-montgomery-s-anne-of-green-gables-anne-of-avonlea-anne-shirley-anne-of-green-gables-3f4ec5a063f641eecd795700790a3405.png?raw=true" width="300px">
+ <img class="home-images left fade-in" src="https://github.com/fairviewbookclub/fairviewbookclub.github.io/blob/main/lucy-maud-montgomery-l-m-montgomery-s-anne-of-green-gables-anne-of-avonlea-anne-shirley-anne-of-green-gables-3f4ec5a063f641eecd795700790a3405.png?raw=true" width="300px" loading="lazy">
   <!-- Duplicate the .book-card block with different data for more books -->
 </div>
 	 
@@ -1053,71 +1227,116 @@ So go ahead, don’t be shy — give it a click and see what’s coming up next.
 	<button id="theme-toggle" aria-label="Toggle theme">
   <img id="theme-icon" src="https://www.svgrepo.com/show/215050/sunset.svg" alt="Toggle Theme" />
 </button>
+      <button id="back-to-top" aria-label="Back to top" title="Back to top" style="display:none;">
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+    <polyline points="18 15 12 9 6 15"></polyline>
+  </svg>
 
 <script>
-	/** Light mode/ dark script**/
+	/** Back to Top **/
+    const backToTopBtn = document.getElementById('back-to-top');
+
+    // Show button when user scrolls down 200px
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 200) {
+        backToTopBtn.style.display = 'block';
+      } else {
+        backToTopBtn.style.display = 'none';
+      }
+    });
+
+    // Smooth scroll back to top on click
+    backToTopBtn.addEventListener('click', () => {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth',
+      });
+    });
+
+	/** Light mode/ dark script **/
 	const toggleButton = document.getElementById('theme-toggle');
-  const icon = document.getElementById('theme-icon');
-  const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+	const icon = document.getElementById('theme-icon');
+	const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+	
+	// Check for saved theme
+	let theme = localStorage.getItem('theme') || (prefersDark ? 'dark' : 'light');
+	applyTheme(theme);
+	
+	toggleButton.addEventListener('click', () => {
+	  // Step 1: fade out by adding 'theme-fade' class
+	  document.body.classList.add('theme-fade');
+	
+	  // Step 2: after 300ms, switch theme and fade back in
+	  setTimeout(() => {
+	    theme = (theme === 'dark') ? 'light' : 'dark';
+	    localStorage.setItem('theme', theme);
+	    applyTheme(theme);
+	
+	    // Step 3: fade back in by removing 'theme-fade' class
+	    document.body.classList.remove('theme-fade');
+	  }, 300);
+	});
+	
+	function applyTheme(theme) {
+	  if (theme === 'dark') {
+	    document.body.classList.add('dark-mode');
+	    document.body.classList.remove('light-mode');
+	    icon.src = 'https://www.svgrepo.com/show/215050/sunset.svg';
+	  } else {
+	    document.body.classList.add('light-mode');
+	    document.body.classList.remove('dark-mode');
+	    icon.src = 'https://www.svgrepo.com/show/345010/moon-stars.svg';
+	  }
+	}
 
-  // Check for saved theme
-  let theme = localStorage.getItem('theme') || (prefersDark ? 'dark' : 'light');
-  applyTheme(theme);
-
-  toggleButton.addEventListener('click', () => {
-    theme = (theme === 'dark') ? 'light' : 'dark';
-    localStorage.setItem('theme', theme);
-    applyTheme(theme);
-  });
-
-  function applyTheme(theme) {
-    if (theme === 'dark') {
-      document.body.classList.add('dark-mode');
-      document.body.classList.remove('light-mode');
-      icon.src = 'https://www.svgrepo.com/show/215050/sunset.svg';
-    } else {
-      document.body.classList.add('light-mode');
-      document.body.classList.remove('dark-mode');
-      icon.src = 'https://www.svgrepo.com/show/345010/moon-stars.svg';
-    }
-  }
 	/** Modal books **/
+function openModal(card) {
+  document.getElementById('modalImage').src = card.querySelector('img').src;
+  document.getElementById('modalTitle').textContent = card.dataset.title;
+  document.getElementById('modalAuthor').textContent = card.dataset.author;
+  document.getElementById('modalDate').textContent = card.dataset.date;
+  document.getElementById('modalRating').textContent = card.dataset.rating;
+  document.getElementById('modalQuotes').textContent = card.dataset.quotes;
+  document.getElementById('modalDescription').textContent = card.dataset.description;
 
-  function openModal(card) {
-    document.getElementById('modalImage').src = card.querySelector('img').src;
-    document.getElementById('modalTitle').textContent = card.dataset.title;
-    document.getElementById('modalAuthor').textContent = card.dataset.author;
-    document.getElementById('modalDate').textContent = card.dataset.date;
-    document.getElementById('modalRating').textContent = card.dataset.rating;
-	document.getElementById('modalQuotes').textContent = card.dataset.quotes;
-    document.getElementById('modalDescription').textContent = card.dataset.description;
-    document.getElementById('bookModal').style.display = "block";
-  }
+  const modal = document.getElementById('bookModal');
+  modal.style.display = 'block';  // Ensure it's block for transition
+  setTimeout(() => modal.classList.add('show'), 10); // Small delay to trigger animation
+}
 
-  function closeModal() {
-    document.getElementById('bookModal').style.display = "none";
-  }
+function closeModal() {
+  const modal = document.getElementById('bookModal');
+  modal.classList.remove('show');
 
-  // Optional: Close modal on outside click
-  window.onclick = function(event) {
-    if (event.target == document.getElementById('bookModal')) {
-      closeModal();
-    }
+  setTimeout(() => {
+    modal.style.display = 'none';
+  }, 300);
+}
+
+window.onclick = function(event) {
+  const modal = document.getElementById('bookModal');
+  if (event.target == modal) {
+    closeModal();
   }
+}
+
+
 
 
   /** Tab Functions by Blue Snow**/
-  var page = document.getElementsByClassName('page');
-		
-		function changePage(index) {
-			for (var i = 0; i < page.length; i++) {
-				page[i].style.display = 'none';
-			}
-			page[index - 1].style.display = 'block';
-			window.scroll(0, 0);
-		}
-		
-		changePage(1);
+ var page = document.getElementsByClassName('page');
+
+function changePage(index) {
+  for (var i = 0; i < page.length; i++) {
+    page[i].classList.remove('active');
+  }
+
+  page[index - 1].classList.add('active');
+  window.scroll(0, 0);
+}
+
+changePage(1);
+
   /** Fade-in-out scroll by Nicolas @nickrg **/
 document.addEventListener("DOMContentLoaded", () => {
     // I sorted the code a bit into options and a callback function. It's just easier for my bird-brain to understand :)
@@ -1268,8 +1487,45 @@ document.addEventListener('DOMContentLoaded', () => {
 
 });
 
+
+
+
  
 
+</script>
+<script>
+ document.addEventListener('DOMContentLoaded', () => {
+    const starWrapper = document.getElementById('starWrapper');
+    const progressPercent = document.getElementById('progressPercent');
+    const progressTracker = document.getElementById('progressTracker');
+
+    // This is your reading progress (0 to 100)
+    const readingProgress = 56; // Example percent; replace with your dynamic value
+
+    // Function to animate star position and update percent text
+    function animateProgress(progress) {
+      // Clamp progress between 0 and 100
+      const clamped = Math.min(Math.max(progress, 0), 100);
+      // Set star position in percent (0% to 100%)
+      starWrapper.style.left = clamped + '%';
+      // Update percent text
+      progressPercent.textContent = clamped + '% Read';
+    }
+
+    // Intersection Observer to trigger animation once when in viewport
+    const observer = new IntersectionObserver((entries, observer) => {
+      entries.forEach(entry => {
+        if(entry.isIntersecting) {
+          animateProgress(readingProgress);
+          observer.unobserve(progressTracker); // run only once
+        }
+      });
+    }, {
+      threshold: 0.5 // half of the progress tracker visible to trigger
+    });
+
+    observer.observe(progressTracker);
+  });
 </script>
 </body>
 </html>
