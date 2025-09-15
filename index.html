@@ -263,6 +263,15 @@
     .homepage-content h1 p{
       padding:5px;
     }
+    
+    .events-content{
+ 	  padding: 4rem 1rem;
+      background-color: #1A1A1A;
+      max-width: 1200px;
+      margin: 0 auto;
+      margin-bottom: 2rem;
+    
+    }
 
     .small-image {
       flex: 1 1 250px;
@@ -421,48 +430,6 @@
     }
 
 	
-/* Webpage button style */
-	.button {
-	  border-radius: 4px;
-	  background-color: #99ccff;
-	  border: none;
-	  color: #FFFFFF;
-	  text-align: center;
-	  font-size: 28px;
-	  padding: 20px;
-	  width: 220px;
-	  height:65px;
-	  transition: all 0.5s;
-	  cursor: pointer;
-	  margin: 5px;
-	  justify-content:space-evenly;
-	}
-
-	.button span {
-	  cursor: pointer;
-	  display: inline-block;
-	  position: relative;
-	  transition: 0.5s;
-	}
-	
-	.button span:after {
-	  content: '\00bb';
-	  position: absolute;
-	  opacity: 0;
-	  top: 0;
-	  right: -20px;
-	  transition: 0.5s;
-	}
-	
-	.button:hover span {
-	  padding-right: 25px;
-	}
-	
-	.button:hover span:after {
-	  opacity: 1;
-	  right: 0;
-	}
-	  
 	.card-grid {
 	  display: grid;
 	  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -473,8 +440,8 @@
 	
 	.flip-card {
 	  background-color: transparent;
-	  width: 300px;
-	  height: 300px;
+	  width: 400px;
+	  height: 400px;
 	}
 	
 	.flip-card-inner {
@@ -511,7 +478,7 @@
 	.flip-card-front {
 	  background-color: #2a2a2a;
 	  color: white;
-	  max-width:300px;
+	  max-width:400px;
 	  box-sizing: border-box;
 	}
 	
@@ -651,28 +618,55 @@
       }
 
       /* Modal Styles */
-      .modal {
-        display: none; 
-        position: fixed;
-        z-index: 9999;
-        left: 0;
-        top: 0;
-        width: 100%;
-        height: 100%;
-        overflow: auto;
-        background-color: rgba(0,0,0,0.85);
-      }
+     .modal {
+      display: none;
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background-color: rgba(0, 0, 0, 0.7);
+      backdrop-filter: blur(4px);
+      z-index: 9999;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      overflow: auto;
+    }
 
-      .modal-content {
-        background-color: #1a1a1a;
-        margin: auto;
-        padding: 2rem;
-        border-radius: 10px;
-        max-width: 600px;
-        color: #f5f5f5;
-        box-shadow: 0 0 30px rgba(0,0,0,0.8);
-        animation: fadeIn 0.3s ease-out;
-      }
+    .modal.show {
+      display: block;
+      opacity: 1;
+    }
+
+    .modal-content {
+      position: fixed; /* instead of static/relative inside modal overlay */
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background-color: #1a1a1a;
+      /* remove margin: 5vh auto; */
+      padding: 2rem;
+      border-radius: 10px;
+  max-width: 100vw;   /* Use viewport width for responsiveness */
+  max-height: 150vh;
+      overflow-y: auto;
+      color: #f5f5f5;
+      box-shadow: 0 0 30px rgba(0,0,0,0.8);
+      animation: fadeIn 0.3s ease-out;
+      scrollbar-width: thin;
+      scrollbar-color: rgba(255, 255, 255, 0.2) transparent;
+	}
+
+
+    .modal-content::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    .modal-content::-webkit-scrollbar-thumb {
+      background-color: rgba(255, 255, 255, 0.15);
+      border-radius: 10px;
+    }
+
+    .modal-content::-webkit-scrollbar-track {
+      background: transparent;
+    }
 
       .modal-content img {
         max-width: 100%;
@@ -684,23 +678,6 @@
         margin-top: 0;
         color: #99ccff;
       }
-
-      #bookModal {
-        display: none;
-        position: fixed;
-        top: 0; left: 0; right: 0; bottom: 0;
-        background-color: rgba(0, 0, 0, 0.7);
-        backdrop-filter: blur(4px);
-        opacity: 0;
-        transition: opacity 0.3s ease;
-        z-index: 9999;
-        overflow-y: auto;
-      }
-
-      #bookModal.show {
-        opacity: 1;
-      }
-
 
       .close {
         color: #ccc;
@@ -856,311 +833,259 @@
 	  background-color: #000066;
 	}
 
-	  /* Container for the progress tracker */
-  #progressTracker {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    width: 300px; /* or any width you prefer */
-    margin-top: 20px;
-  }
+/* Container for the progress tracker */
+    #progressTracker {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      width: 300px; /* or any width you prefer */
+      margin-top: 20px;
+    }
 
-  /* The progress track bar */
-  #progressBar {
-    position: relative;
-    flex-grow: 1;
-    height: 8px;
-    background: #ddd;
-    border-radius: 4px;
-  }
+    /* The progress track bar */
+    #progressBar {
+      position: relative;
+      flex-grow: 1;
+      height: 8px;
+      background: #ddd;
+      border-radius: 4px;
+    }
 
-  /* The star wrapper that moves */
-  #starWrapper {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    transition: left 1.5s ease;
-    width: 30px;
-    height: 30px;
-    pointer-events: none; /* no interaction */
-  }
+    /* The star wrapper that moves */
+    #starWrapper {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      transition: left 1.5s ease;
+      width: 30px;
+      height: 30px;
+      pointer-events: none; /* no interaction */
+    }
 
-  /* Star SVG style */
-  #starWrapper svg {
-    width: 100%;
-    height: 100%;
-    fill: gold;
-    filter: drop-shadow(0 0 3px orange);
-    animation: starGlow 2s infinite alternate;
-  }
+    /* Star SVG style */
+    #starWrapper svg {
+      width: 100%;
+      height: 100%;
+      fill: gold;
+      filter: drop-shadow(0 0 3px orange);
+      animation: starGlow 2s infinite alternate;
+    }
 
-  @keyframes starGlow {
-    0% { filter: drop-shadow(0 0 3px orange); }
-    100% { filter: drop-shadow(0 0 8px orange); }
-  }
+    @keyframes starGlow {
+      0% { filter: drop-shadow(0 0 3px orange); }
+      100% { filter: drop-shadow(0 0 8px orange); }
+    }
 
-  /* Percent text next to star */
-  #progressPercent {
-    min-width: 40px;
-    font-weight: bold;
-    font-size: 1.1rem;
-    color: #333;
-    user-select: none;
-  }
-  
-  /* Events Section */
-  .event-entry {
-    background-color: var(--card-bg, #f9f9f9);
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    padding: 1.5rem;
-    margin-bottom: 1.5rem;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-    transition: transform 0.2s;
-  }
+    /* Percent text next to star */
+    #progressPercent {
+      min-width: 40px;
+      font-weight: bold;
+      font-size: 1.1rem;
+      color: #333;
+      user-select: none;
+    }
+    
+     /* Meetup Entries */
+    .meetup-entry {
+      background-color: #1A1A1A;
+      padding: 1.5rem;
+      border-radius: 10px;
+      margin-bottom: 1.5rem;
+      box-shadow: 0 0 12px rgba(0,0,0,0.3);
+      transition: transform 0.3s ease;
+    }
 
-  .event-entry:hover {
-    transform: translateY(-2px);
-  }
+    .meetup-entry:hover {
+      transform: scale(1.02);
+    }
 
-  .event-entry h3 {
-    margin-top: 0;
-    color: #444;
-  }
+    .meetup-entry h3 {
+      color: #99ccff;
+      margin-top: 0;
+    }
 
-  .event-entry p {
-    margin: 0.5rem 0;
-    line-height: 1.6;
-  }
+    .meetup-entry p {
+      margin: 0.5rem 0;
+    }
 
-  .photos-btn {
-    margin-top: 1rem;
-    padding: 0.6rem 1.2rem;
-    font-size: 0.95rem;
-    background-color: #0077cc;
-    color: #fff;
+    /* Filter Controls */
+    .filter-controls {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-bottom: 2rem;
+      align-items: center;
+    }
+
+    .filter-controls label {
+      font-weight: 600;
+    }
+
+    .filter-controls select,
+    .filter-controls button {
+      padding: 0.5rem;
+      font-size: 1rem;
+      border-radius: 6px;
+      border: none;
+      background-color: #222;
+      color: #fff;
+    }
+
+    .filter-controls button,
+    .homepage-content button{
+      background-color: #99ccff;
+      color: #000;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .filter-controls button:hover {
+      background-color: #cce6ff;
+    }
+
+    /* Light mode styles */
+    body.light-mode .meetup-entry {
+      background-color: #fff;
+      color: #121212;
+      box-shadow: 0 0 12px rgba(0,0,0,0.1);
+    }
+
+    body.light-mode .meetup-entry h3 {
+      color: #000080;
+    }
+
+    body.light-mode .filter-controls select,
+    body.light-mode .filter-controls button {
+      background-color: #f0f0f0;
+      color: #000;
+    }
+
+    body.light-mode .filter-controls button:hover {
+      background-color: #000080;
+      color: #fff;
+    }
+
+    /* Fullscreen Modal Slideshow */
+    #photoModal {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0,0,0,0.95);
+      z-index: 9999;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+    }
+
+    #photoModal.show {
+      display: flex;
+    }
+
+    .slideshow-container {
+      position: relative;
+      max-width: 90%;
+      max-height: 80%;
+    }
+
+    .slideshow-image {
+      max-width: 100%;
+      max-height: 80vh;
+      border-radius: 10px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.7);
+    }
+
+    .modal-nav {
+      margin-top: 1rem;
+      display: flex;
+      gap: 1rem;
+    }
+
+    .modal-nav button {
+      padding: 0.5rem 1rem;
+      font-size: 1.2rem;
+      background-color: #99ccff;
+      color: #000;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .modal-nav button:hover {
+      background-color: #cce6ff;
+    }
+
+    #closeModal {
+      position: absolute;
+      top: 20px;
+      right: 30px;
+      font-size: 2rem;
+      color: #fff;
+      cursor: pointer;
+      background: none;
+      border: none;
+    }
+
+    body.light-mode #photoModal {
+      background-color: rgba(255,255,255,0.95);
+    }
+
+    body.light-mode #closeModal {
+      color: #121212;
+    }
+
+
+   .meetup-entry button,
+   .button{
+    background-color: #99ccff;
+    color: #121212;
     border: none;
+    padding: 12px 20px;
+    font-size: 1rem;
     border-radius: 6px;
     cursor: pointer;
-    transition: background-color 0.3s;
+    margin-top: 10px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
   }
 
-  .photos-btn:hover {
-    background-color: #005fa3;
+  .meetup-entry button:hover,
+  .homepage-content button:hover{
+    background-color: #66b3ff;
+    transform: scale(1.05);
+  }
+
+  body.light-mode .meetup-entry button {
+    background-color: #000080;
+    color: #ffffff;
+  }
+
+  body.light-mode .meetup-entry button:hover {
+    background-color: #000066;
   }
   
-    /* Slideshow Modal */
-  .photo-modal {
-    display: none;
-    position: fixed;
-    z-index: 1000;
-    left: 0;
-    top: 0;
-    width: 100vw;
-    height: 100vh;
-    overflow: hidden;
-    background-color: rgba(0, 0, 0, 0.9);
-    justify-content: center;
-    align-items: center;
-    padding: 20px;
-    box-sizing: border-box;
-  }
-
-  .photo-modal.show {
-    display: flex;
-    flex-direction: column;
-  }
-
-  .photo-modal-content {
-    max-width: 100%;
-    max-height: 100%;
-    text-align: center;
-    position: relative;
-    color: #fff;
-  }
-
-  .photo-modal img {
-    max-width: 90vw;
-    max-height: 70vh;
-    border-radius: 8px;
-    object-fit: contain;
-  }
-
-  .photo-controls {
-    margin-top: 20px;
-  }
-
-  .photo-controls button {
-    background: rgba(255, 255, 255, 0.15);
-    color: #fff;
-    border: none;
-    padding: 10px 18px;
-    margin: 0 10px;
-    cursor: pointer;
-    font-size: 16px;
-    border-radius: 5px;
-    transition: background 0.3s ease;
-  }
-
-  .photo-controls button:hover {
-    background: rgba(255, 255, 255, 0.35);
-  }
-
-  #modalCaption {
-    margin-top: 15px;
-    font-style: italic;
-    font-size: 14px;
+    #modalCaption {
     color: #ccc;
+    font-size: 1.1rem;
+    font-style: italic;
+    margin-top: 0.5rem;
+    margin-bottom: 1.5rem;
+    line-height: 1.4;
   }
 
-  .close-btn {
-    position: absolute;
-    top: 20px;
-    right: 30px;
-    font-size: 30px;
-    color: white;
-    cursor: pointer;
-    z-index: 10;
+  body.light-mode #modalCaption {
+    color: #444;
+  }
+  
+  .fade {
+    animation: fadeIn 0.5s ease-in-out;
   }
 
-/* Filter Controls Section */
-.filter-controls {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  margin: 1.5rem 0;
-  flex-wrap: wrap;
-  background-color: #1A1A1A;
-  padding: 1rem;
-  border-radius: 8px;
-  box-shadow: 0 0 10px rgba(0,0,0,0.3);
-}
-
-.filter-controls label {
-  font-weight: 600;
-  font-family: 'Montserrat Alternates', sans-serif;
-}
-
-.filter-controls select,
-#clearFilters {
-  padding: 0.5rem 1rem;
-  font-size: 1rem;
-  border-radius: 6px;
-  border: none;
-  background-color: #2a2a2a;
-  color: #f5f5f5;
-  transition: background-color 0.3s ease, color 0.3s ease;
-}
-
-.filter-controls select:hover,
-#clearFilters:hover {
-  background-color: #3a3a3a;
-  cursor: pointer;
-}
-
-#clearFilters {
-  background-color: #99ccff;
-  color: #121212;
-  font-weight: bold;
-}
-
-#clearFilters:hover {
-  background-color: #cce6ff;
-  color: #000;
-}
-
-/* Meetup Entry Styling */
-.meetup-entry {
-  background-color: #1A1A1A;
-  border-left: 4px solid #99ccff;
-  padding: 1.5rem;
-  margin: 1rem 0;
-  border-radius: 8px;
-  box-shadow: 0 0 12px rgba(0,0,0,0.2);
-  transition: background-color 0.3s ease, transform 0.3s ease;
-}
-
-.meetup-entry h3 {
-  font-size: 1.6rem;
-  color: #99ccff;
-  font-family: 'Montserrat Alternates', sans-serif;
-  margin-bottom: 0.5rem;
-}
-
-.meetup-entry p {
-  font-size: 1rem;
-  color: #ddd;
-  margin-bottom: 1rem;
-}
-
-.meetup-entry button {
-  background-color: #000080;
-  color: #fff;
-  padding: 0.6rem 1.2rem;
-  border: none;
-  border-radius: 6px;
-  font-size: 1rem;
-  font-family: 'Work Sans', sans-serif;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-.meetup-entry button:hover {
-  background-color: #000066;
-}
-
-/* Light Mode */
-body.light-mode .filter-controls {
-  background-color: #fff;
-  box-shadow: 0 0 8px rgba(0,0,0,0.1);
-}
-
-body.light-mode .filter-controls select,
-body.light-mode #clearFilters {
-  background-color: #f0f0f0;
-  color: #121212;
-}
-
-body.light-mode .filter-controls select:hover,
-body.light-mode #clearFilters:hover {
-  background-color: #e0e0e0;
-}
-
-body.light-mode .meetup-entry {
-  background-color: #fff;
-  border-left-color: #000080;
-  box-shadow: 0 0 12px rgba(0,0,0,0.1);
-}
-
-body.light-mode .meetup-entry h3 {
-  color: #000080;
-}
-
-body.light-mode .meetup-entry p {
-  color: #333;
-}
-
-body.light-mode .meetup-entry button {
-  background-color: #000080;
-  color: #fff;
-}
-
-body.light-mode .meetup-entry button:hover {
-  background-color: #000066;
-}
-
-/* Responsive for mobile */
-@media (max-width: 600px) {
-  .filter-controls {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 0.5rem;
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
   }
-
-  .meetup-entry {
-    padding: 1rem;
-  }
-}
 
 
 
@@ -1178,9 +1103,11 @@ body.light-mode .meetup-entry button:hover {
 		<a href="javascript:changePage(3);">Books</a>
 		<a href="javascript:changePage(4);">Members</a>
 		<a href="javascript:changePage(5);">Events Archive</a>
+        <a href="javascript:changePage(6);"></a>
     </div>
   </nav>
 <!--------------------------------          HOME PAGE                 ------------------------------->
+
   <div class="page">
   <!-- Cover Section -->
   <div class="cover-section hero-darkened fade-in">
@@ -1382,6 +1309,8 @@ So go ahead, don’t be shy — give it a click and see what’s coming up next.
 	   
     <img class="fade-in" src="https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1566425108i/33.jpg" alt="Mistmantle Chronicles">
   </div>
+  
+
 
  <img class="home-images left fade-in" src="https://github.com/fairviewbookclub/fairviewbookclub.github.io/blob/main/lucy-maud-montgomery-l-m-montgomery-s-anne-of-green-gables-anne-of-avonlea-anne-shirley-anne-of-green-gables-3f4ec5a063f641eecd795700790a3405.png?raw=true" width="300px" loading="lazy">
   <!-- Duplicate the .book-card block with different data for more books -->
@@ -1402,11 +1331,8 @@ So go ahead, don’t be shy — give it a click and see what’s coming up next.
 </div>
 
 
-<!-- Modal Structure -->
-<div id="bookModal" class="modal" onclick="closeModal()">
-  <span class="close">&times;</span>
-  <img class="modal-content" id="modalImg">
-</div>
+
+
 
   </div>
   <!-- Members -->
@@ -1417,7 +1343,7 @@ So go ahead, don’t be shy — give it a click and see what’s coming up next.
   </div>
 		<!-- Book Club Flip Cards Section -->
 <section class="homepage-content fade-in">
-  <h2 style="text-align: center;">Meet the Crew</h2>
+  <h2 style="text-align: center;">Meet the Council</h2>
 	<p>By the way, in order to scroll in the member cards, click the target card and use arrow keys. If on mobile, use your fingers. Or toes</p>
   <div class="card-grid">
     <!-- Noa Cruz -->
@@ -1443,7 +1369,7 @@ So go ahead, don’t be shy — give it a click and see what’s coming up next.
         <div class="flip-card-back">
           <h3 class="fade-in">Isaac</h3>
           <p class="fade-in">Tech Whiz</p>
-          <p class="fade-in"><em>Isaac is an aspiring web developer and the maker of this webpage. He is also an avid reader - mostly historical fiction and fantasty. Unlike the CEO, he likes 39 Clues and for some reason also like mentioning it to the CEO. It's a miracle he's not dead yet.</em></p> <p><em>In his free time, Isaac likes chess, basketball, making poor life choices and of course reading.</em></p>
+          <p class="fade-in"><em>Isaac is an aspiring web developer and the maker of this webpage. He is also an avid reader - mostly historical fiction and fantasty. Unlike the CEO, he likes 39 Clues and for some reason also like mentioning it to the CEO. It's a miracle he's not dead yet.</em></p> <p class="fade-in"><em>In his free time, Isaac likes chess, basketball, making poor life choices and of course reading.</em></p>
 			<div class="contact-section fade-in">
   <a href="https://www.facebook.com/isaact.teodoro.15/" class="contact-links fade-in" target="_blank" rel="noopener">
     <img src="https://www.svgrepo.com/show/382728/messenger-facebook.svg"
@@ -1529,33 +1455,50 @@ So go ahead, don’t be shy — give it a click and see what’s coming up next.
 
   <button id="clearFilters">Clear Filters</button>
 </div>
-
+<section class="events-content fade-in">
 
   <!-- Meetup Entries -->
-<div class="meetup-entry" data-year="2025" data-month="08">
+<div class="meetup-entry fade-in"
+     data-year="2025"
+     data-month="08"
+     data-images='[
+       {"url": "https://via.placeholder.com/800x600?text=August+1", "caption": "The group arriving"},
+       {"url": "https://via.placeholder.com/800x600?text=August+2", "caption": "Discussion in progress"},
+       {"url": "https://via.placeholder.com/800x600?text=August+3", "caption": "Group photo"}
+     ]'>
+
   <h3>August 2025 Meetup</h3>
   <p><strong>Theme:</strong> Sci-Fi Night</p>
-  <button onclick="openPhotoModal('august')">View Photos</button>
+  <button onclick="openPhotoModal(this)">View Photos</button>
 </div>
 
-<div class="meetup-entry" data-year="2025" data-month="07">
-  <h3>July 2025 Meetup</h3>
+
+<div class="meetup-entry fade-in" data-year="2024" data-month="07">
+  <h3>July 2024 Meetup</h3>
   <p><strong>Theme:</strong> Mystery Hour</p>
-  <button onclick="openPhotoModal('july')">View Photos</button>
+  <!--- button below toggles modal-->
+  <button onclick="openPhotoModal(this)">View Photos</button>
 </div>
 
-<!-- Sample for another month, commented out -->
-<!--
-<div class="meetup-entry" data-year="2025" data-month="09">
-  <h3>September 2025 Meetup</h3>
-  <p><strong>Theme:</strong> Fantasy Worlds</p>
-  <button onclick="openPhotoModal('september')">View Photos</button>
+
+  </section>
+
+<div id="photoModal" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closePhotoModal()">&times;</span>
+    <img id="modalImage" src="" alt="Meetup Photo">
+    <p id="modalCaption" class="image-caption"></p>
+
+    <div class="modal-nav">
+      <button onclick="prevImage()">← Prev</button>
+      <button onclick="nextImage()">Next →</button>
+    </div>
+  </div>
 </div>
--->
-
-
-
 	</div>
+
+
+
   <!-- Footer -->
   <footer>
     &copy; 2025 Fairview Homeschoolers Book Club. All rights reserved.
@@ -1573,21 +1516,6 @@ So go ahead, don’t be shy — give it a click and see what’s coming up next.
 <!-- Trigger Button (optional elsewhere) -->
 <!-- <button onclick="openPhotoModal('august')">View Meetup Photos</button> -->
 
-<!-- Photo Slideshow Modal -->
-<div id="photoModal" class="photo-modal">
-  <span class="close-modal" onclick="closePhotoModal()">&times;</span>
-
-  <div class="photo-content">
-    <button class="prev" onclick="prevSlide()">&#10094;</button>
-
-    <div class="photo-inner">
-      <img id="modalImg" src="" alt="Meetup Photo" />
-      <p id="modalCaption" class="caption"></p>
-    </div>
-
-    <button class="next" onclick="nextSlide()">&#10095;</button>
-  </div>
-</div>
 
 
 
@@ -1649,8 +1577,14 @@ So go ahead, don’t be shy — give it a click and see what’s coming up next.
 	  }
 	}
 
-	/** Modal books **/
+let lastScrollY = 0;
+
+// ===== Modal Open Function =====
 function openModal(card) {
+  // Save current scroll position
+  lastScrollY = window.scrollY || window.pageYOffset;
+
+  // Populate modal content with data attributes from the clicked book
   document.getElementById('modalImage').src = card.querySelector('img').src;
   document.getElementById('modalTitle').textContent = card.dataset.title;
   document.getElementById('modalAuthor').textContent = card.dataset.author;
@@ -1659,28 +1593,44 @@ function openModal(card) {
   document.getElementById('modalQuotes').textContent = card.dataset.quotes;
   document.getElementById('modalDescription').textContent = card.dataset.description;
 
+  // Show modal
   const modal = document.getElementById('bookModal');
-  modal.style.display = 'block';  // Ensure it's block for transition
-  setTimeout(() => modal.classList.add('show'), 10); // Small delay to trigger animation
+  modal.style.display = 'block';
+
+  // Trigger CSS opacity transition
+  setTimeout(() => modal.classList.add('show'), 10);
+
+  // Prevent background scrolling
+  document.body.style.overflow = 'hidden';
 }
 
+// ===== Modal Close Function =====
 function closeModal() {
   const modal = document.getElementById('bookModal');
   modal.classList.remove('show');
 
+  // After fade-out, hide modal and restore scroll
   setTimeout(() => {
     modal.style.display = 'none';
-  }, 300);
+    document.body.style.overflow = '';
+    window.scrollTo(0, lastScrollY); // Restore scroll position
+  }, 300); // Matches CSS transition duration
 }
 
+// ===== Close modal when clicking outside modal-content =====
 window.onclick = function(event) {
   const modal = document.getElementById('bookModal');
-  if (event.target == modal) {
+  if (event.target === modal) {
     closeModal();
   }
-}
+};
 
-
+// ===== Optional: Close with ESC key =====
+window.addEventListener('keydown', function(event) {
+  if (event.key === 'Escape') {
+    closeModal();
+  }
+});
 
 
   /** Tab Functions by Blue Snow**/
@@ -1823,38 +1773,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Start rotating every 6 seconds
   setInterval(showNextQuote, 6000);
-</script>
-</script>
-
-
-  <!-- Lenis Smooth Scroll-->
-<script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
-<script >
-document.addEventListener('DOMContentLoaded', () => {
-  const lenis = new Lenis({
-    lerp: 0.05,
-    wheelMultiplier: 0.8,
-    duration: 1.5,
-    easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-  });
-
-  function raf(time) {
-    lenis.raf(time);
-    requestAnimationFrame(raf);
-  }
-
-  requestAnimationFrame(raf);
-
-});
-
-
-
-
- 
-
-</script>
-<script>
- document.addEventListener('DOMContentLoaded', () => {
+  
+  document.addEventListener('DOMContentLoaded', () => {
     const starWrapper = document.getElementById('starWrapper');
     const progressPercent = document.getElementById('progressPercent');
     const progressTracker = document.getElementById('progressTracker');
@@ -1887,77 +1807,113 @@ document.addEventListener('DOMContentLoaded', () => {
     observer.observe(progressTracker);
   });
   
-  document.addEventListener('DOMContentLoaded', () => {
-    const filterYear = document.getElementById('filter-year');
-    // const filterMonth = document.getElementById('filter-month');
-    const events = document.querySelectorAll('.event-entry');
+</script>
 
-    function filterEvents() {
-      const year = filterYear.value;
-      // const month = filterMonth.value;
 
-      events.forEach(event => {
-        const eventYear = event.dataset.year;
-        // const eventMonth = event.dataset.month;
 
-        const yearMatch = (year === 'all') || (eventYear === year);
-        // const monthMatch = (month === 'all') || (eventMonth === month);
+  <!-- Lenis Smooth Scroll-->
+<script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
+<script >
+document.addEventListener('DOMContentLoaded', () => {
+  const lenis = new Lenis({
+    lerp: 0.05,
+    wheelMultiplier: 0.8,
+    duration: 1.5,
+    easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+  });
 
-        event.style.display = (yearMatch) ? 'block' : 'none';
-      });
+  function raf(time) {
+    lenis.raf(time);
+    requestAnimationFrame(raf);
+  }
+
+  requestAnimationFrame(raf);
+
+});
+
+
+
+
+ 
+
+</script>
+<script>
+  let currentImages = [];
+  let currentIndex = 0;
+
+  const modal = document.getElementById("photoModal");
+  const modalImage = document.getElementById("modalImage");
+  const modalCaption = document.getElementById("modalCaption");
+
+  function openPhotoModal(button) {
+    const parent = button.closest('.meetup-entry');
+    const imageData = parent.dataset.images;
+
+    if (!imageData) return;
+
+    try {
+      currentImages = JSON.parse(imageData);
+      currentIndex = 0;
+      if (currentImages.length > 0) {
+        updateModalImage();
+        modal.classList.add("show");
+      }
+    } catch (err) {
+      console.error("Invalid image data in data-images attribute:", err);
     }
+  }
 
-    filterYear.addEventListener('change', filterEvents);
-    // filterMonth.addEventListener('change', filterEvents);
+  function updateModalImage() {
+    const { url, caption } = currentImages[currentIndex];
 
-    // Initialize filter on page load
-    filterEvents();
-    
-    
-  const photoData = {
-  august: [
-    { src: 'august1.jpg', caption: 'Group photo at the library' },
-    { src: 'august2.jpg', caption: 'Discussing Dune' },
-  ],
-  july: [
-    { src: 'july1.jpg', caption: 'Mystery book stack' },
-    { src: 'july2.jpg', caption: 'Tea & discussion' },
-  ]
-};
+    // Remove fade class to reset animation
+    modalImage.classList.remove("fade");
+    modalCaption.classList.remove("fade");
 
-let currentPhotos = [];
-let currentSlideIndex = 0;
+    // Force reflow to restart the animation
+    void modalImage.offsetWidth;
+    void modalCaption.offsetWidth;
 
-function openPhotoModal(key) {
-  currentPhotos = photoData[key];
-  currentSlideIndex = 0;
-  showSlide();
-  document.getElementById('photoModal').style.display = 'block';
-}
+    // Set content
+    modalImage.src = url;
+    modalCaption.textContent = caption || '';
 
-function closePhotoModal() {
-  document.getElementById('photoModal').style.display = 'none';
-}
+    // Re-apply fade class to animate in
+    modalImage.classList.add("fade");
+    modalCaption.classList.add("fade");
+  }
 
-function nextSlide() {
-  currentSlideIndex = (currentSlideIndex + 1) % currentPhotos.length;
-  showSlide();
-}
 
-function prevSlide() {
-  currentSlideIndex = (currentSlideIndex - 1 + currentPhotos.length) % currentPhotos.length;
-  showSlide();
-}
+  function nextImage() {
+    if (currentImages.length === 0) return;
+    currentIndex = (currentIndex + 1) % currentImages.length;
+    updateModalImage();
+  }
 
-function showSlide() {
-  const modalImg = document.getElementById('modalImg');
-  const modalCaption = document.getElementById('modalCaption');
+  function prevImage() {
+    if (currentImages.length === 0) return;
+    currentIndex = (currentIndex - 1 + currentImages.length) % currentImages.length;
+    updateModalImage();
+  }
 
-  modalImg.src = currentPhotos[currentSlideIndex].src;
-  modalCaption.textContent = currentPhotos[currentSlideIndex].caption;
-}
+  function closePhotoModal() {
+    modal.classList.remove("show");
+    modalImage.src = '';
+    modalCaption.textContent = '';
+    currentImages = [];
+    currentIndex = 0;
+  }
 
+
+
+  // Optional: Close modal if clicking outside image
+  modal.addEventListener("click", function(event) {
+    if (event.target === modal) {
+      closePhotoModal();
+    }
   });
 </script>
+
+
 </body>
 </html>
