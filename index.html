@@ -1088,6 +1088,32 @@
     to { opacity: 1; transform: translateY(0); }
   }
 
+/* Logo Styling */
+.logo img {
+  height: 30px;
+  width: 250px;
+  display: block;
+  filter: drop-shadow(0 0 5px rgba(0, 0, 0, 0.7));
+  transition: transform 0.3s ease;
+}
+
+.logo img:hover {
+  transform: scale(1.05);
+}
+
+/* Light Mode Logo Styling */
+body.light-mode .logo img {
+  filter: drop-shadow(0 0 3px rgba(255, 255, 255, 0.7));
+}
+
+/* Responsive tweak */
+@media (max-width: 600px) {
+  .logo img {
+    height: 45px;
+  }
+}
+
+
 
 
   </style>
@@ -1097,7 +1123,12 @@
 
   <!-- Navigation -->
   <nav>
-    <div class="logo"><strong>Fairview Book Club</strong></div>
+    <div class="logo">
+  <a href="javascript:changePage(1);">
+    <img src="https://github.com/fairviewbookclub/fairviewbookclub.github.io/blob/main/backyardigans-high-resolution-logo-transparent.png?raw=true" alt="Fairview Book Club Logo" />
+  </a>
+</div>
+
     <div class="nav-links">
         <a href="javascript:changePage(1);">Home</a>
 		<a href="javascript:changePage(2);">About</a>
@@ -1112,7 +1143,7 @@
   <div class="page">
   <!-- Cover Section -->
   <div class="cover-section hero-darkened fade-in">
-    <h1 class="fade-in" >Fairview Homeschooler's Book Club!</h1>
+    <h1 class="fade-in" >BACKYARDIGANS HQ</h1>
   </div>
 <br></br>
   <!-- Content Sections -->
