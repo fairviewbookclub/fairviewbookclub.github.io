@@ -21,6 +21,9 @@
       color: #f5f5f5; /* Soft white for dark mode */
       line-height: 1.6;
 	  overflow-x: hidden; /* Prevents x-overflow*/
+      min-height: 100vh;
+      overflow-y: scroll; /* always show vertical scroll */
+      overscroll-behavior-y: contain; /* prevent scroll chaining */
     }
 	  /*Transition to light/dark*/
 	.card, .modal, .button, .quote-box {
@@ -128,8 +131,13 @@
 	  visibility: hidden;
 	  transform: translateY(20px);
 	  transition: opacity 0.5s ease, transform 0.5s ease, visibility 0s linear 0.5s;
+       margin-bottom: 0;
 	  position: absolute;
 	  width: 100%;
+      min-height: 100vh;
+      box-sizing: border-box;
+      overflow-x:hidden;
+      padding-bottom: 1rem;
 	}
 	
 	.page.active {
@@ -310,7 +318,9 @@
     /* Footer */
     footer {
       text-align: center;
-      padding: 2rem;
+		 margin-bottom: 0;
+  padding-bottom: 2.5rem; /* small padding if you want */
+  box-sizing: border-box;
       font-size: 0.9rem;
       color: #bbbbbb;
       background-color: #1A1A1A;
@@ -775,7 +785,8 @@
 	body.light-mode .cover-section h1,
 	body.light-mode .cover-section2 h1,
 	body.light-mode .cover-section3 h1,
-	body.light-mode .cover-section4 h1 {
+	body.light-mode .cover-section4 h1,
+	body.light-mode .cover-section5 h1 {
 	  background-color: rgba(255, 255, 255, 0.7);
 	  color: #000;
 	  text-shadow: none;
@@ -882,9 +893,15 @@
       min-width: 40px;
       font-weight: bold;
       font-size: 1.1rem;
-      color: #333;
+      color: white;
       user-select: none;
     }
+	  
+	.countdown {
+	  text-align: center;
+	  font-size: 1.3rem;
+	  margin-top: 3rem;
+	}
     
      /* Meetup Entries */
     .meetup-entry {
@@ -950,6 +967,10 @@
       color: #121212;
       box-shadow: 0 0 12px rgba(0,0,0,0.1);
     }
+
+	.body.light-mode #progressPercent{
+		color:#333;
+	}
 
     body.light-mode .meetup-entry h3 {
       color: #000080;
@@ -1178,7 +1199,7 @@ Our book club is created by and for homeschoolers in Fairview, and it’s open t
       </svg>
     </div>
   </div>
-  <div id="progressPercent">0%</div><br><br><br><br><br>
+  <div id="progressPercent">0%</div><br><br>
 </div>
     </div>
   <br><br>
@@ -1236,17 +1257,20 @@ Our book club is created by and for homeschoolers in Fairview, and it’s open t
 	 <button onClick="javascript:changePage(4);" class="button fade-in"><span>Members </span></button>
  </section>
 		   <section class="homepage-content fade-in">
-   <h1 class="fade-in">When's Our Next Event?</h1>
+   <h1 class="fade-in">Where can I see our past events.</h1>
 			   <img class="home-images left fade-in" src="https://github.com/fairviewbookclub/fairviewbookclub.github.io/blob/main/aslan-lion-desktop-wallpaper-download-lion-d14cd90631f82fce6613dd53693c5253.png?raw=true" style="transform: scaleX(-1);" width="300px">
-    <p class="fade-in">Well, you've come to the right place! (And if you somehow missed that big shiny word up there in the navbar labeled "Events" — don’t worry, our CEO won’t hold it against you. [Maybe])</p>
+    <p class="fade-in">Well, you've come to the right place! (And if you somehow missed that big shiny word up there in the navbar labeled "Events Archive" — don’t worry, our CEO won’t hold it against you. [Maybe])</p>
 <p class="fade-in">
 All you need to do now is click the magical little button below and — viola! — you’ll unlock the full list of everything we've got going on. From upcoming happenings to can't-miss meetups, it's all right there, waiting for you to explore.</p>
 <p class="fade-in">
-So go ahead, don’t be shy — give it a click and see what’s coming up next. Who knows? Your new favorite event might just be one day away.</p>
+So go ahead, don’t be shy — give it a click and see what’s coming up next. I'll bet you'll have a grand time seeing your past self. (and maybe be a little cringe LOL).</p>
 
 	 <button onClick="javascript:changePage(5);" class="button fade-in"><span>Events </span></button>
  </section>
-	 
+	 <section class="countdown fade-in">
+  <h2>📅 Days Till Our Next Event</h2>
+  <h3 id="meetupCountdown">Loading...</h3>
+</section>
 		   
   </div>
   </div>
@@ -1553,6 +1577,24 @@ So go ahead, don’t be shy — give it a click and see what’s coming up next.
 
 
 <script>
+	function startCountdown(targetDate) {
+  const countdownEl = document.getElementById('meetupCountdown');
+  const interval = setInterval(() => {
+    const now = new Date().getTime();
+    const distance = new Date(targetDate) - now;
+    if (distance < 0) {
+      clearInterval(interval);
+      countdownEl.textContent = "We're meeting now!";
+      return;
+    }
+    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+    const hrs = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const mins = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    countdownEl.textContent = `${days}d ${hrs}h ${mins}m to go!`;
+  }, 1000);
+}
+startCountdown("2025-09-28T18:00:00"); // update date as needed
+
 	/** Back to Top **/
     const backToTopBtn = document.getElementById('back-to-top');
 
