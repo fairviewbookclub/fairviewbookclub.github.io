@@ -236,10 +236,24 @@
       text-align: center;
     }
 
+	.cover-section5 {
+      position: relative;
+      height: 400px;
+      background-image:url("https://media.gettyimages.com/id/2150003747/video/young-man-greeting-friend-and-stretching-on-the-public-park.jpg?s=640x640&k=20&c=Nj64NJzlOet4eJTNTFqErBROBPHHU4EUz_0HHoHOEG8=");
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+    }
+
     .cover-section h1,
 	.cover-section2 h1,
 	.cover-section3 h1,
-	.cover-section4 h1{
+	.cover-section4 h1,
+	.cover-section5 h1{
       background-color: rgba(0, 0, 0, 0.4); /* translucent black overlay */
       color: #ffffff;
       text-shadow: 0 0 20px rgba(255, 255, 255, 0.8);
@@ -526,6 +540,15 @@
 	.contact-links:hover{
 		opacity:0.5;
 	}
+    
+    hr {
+  width: 50%;                /* Centered via width */
+  margin: 40px auto;         /* Auto margins center it horizontally */
+  border: none;              /* Remove default border */
+  height: 2px;               /* Set thickness */
+  background-color: rgba(128, 128, 128, 0.4);  /* Semi-transparent black */
+}
+
 
 	.avatar {
 	  vertical-align: middle;
@@ -928,6 +951,7 @@
 
     /* Filter Controls */
     .filter-controls {
+      padding:10px;
       display: flex;
       gap: 1rem;
       flex-wrap: wrap;
@@ -1258,15 +1282,16 @@ Our book club is created by and for homeschoolers in Fairview, and it’s open t
  </section>
 		   <section class="homepage-content fade-in">
    <h1 class="fade-in">Where can I see our past events.</h1>
-			   <img class="home-images left fade-in" src="https://github.com/fairviewbookclub/fairviewbookclub.github.io/blob/main/aslan-lion-desktop-wallpaper-download-lion-d14cd90631f82fce6613dd53693c5253.png?raw=true" style="transform: scaleX(-1);" width="300px">
+			   <img class="home-images left fade-in" src="https://github.com/fairviewbookclub/fairviewbookclub.github.io/blob/main/aslan-lion-desktop-wallpaper-download-lion-d14cd90631f82fce6613dd53693c5253.png?raw=true" style="transform: scaleX(-1);" width="280px">
     <p class="fade-in">Well, you've come to the right place! (And if you somehow missed that big shiny word up there in the navbar labeled "Events Archive" — don’t worry, our CEO won’t hold it against you. [Maybe])</p>
 <p class="fade-in">
 All you need to do now is click the magical little button below and — viola! — you’ll unlock the full list of everything we've got going on. From upcoming happenings to can't-miss meetups, it's all right there, waiting for you to explore.</p>
 <p class="fade-in">
 So go ahead, don’t be shy — give it a click and see what’s coming up next. I'll bet you'll have a grand time seeing your past self. (and maybe be a little cringe LOL).</p>
 
-	 <button onClick="javascript:changePage(5);" class="button fade-in"><span>Events </span></button>
+	 <button onClick="javascript:changePage(5);" class="button fade-in"><span>Events </span></button><br>
  </section>
+	  <hr>
 	 <section class="countdown fade-in">
   <h2>📅 Days Till Our Next Event</h2>
   <h3 id="meetupCountdown">Loading...</h3>
@@ -1279,7 +1304,7 @@ So go ahead, don’t be shy — give it a click and see what’s coming up next.
 	  <div class="cover-section2 hero-darkened fade-in">
     <h1 class="fade-in" >About Us</h1>
   </div>
-
+<br>
 <section class="homepage-content fade-in">
    <h1 class="fade-in">What Makes Us Unique?</h1>
     <img class="home-images right fade-in" src="https://github.com/fairviewbookclub/fairviewbookclub.github.io/blob/main/peter-pan-peter-and-wendy-wendy-darling-captain-hook-tinker-bell-peter-pan-png-photo-2db385003f4ad83ed5fdc3062a9f5df5.png?raw=true" width="200px">
@@ -1490,9 +1515,21 @@ So go ahead, don’t be shy — give it a click and see what’s coming up next.
 	</div>
     
 	<div class="page">
-		 <h2>Events Archive</h2>
+		<div class="cover-section5 hero-darkened fade-in">
+    <h1 class="fade-in" >Events Archive</h1>
+  </div>
 
-  <div class="filter-controls">
+		 <section class="homepage-content fade-in">
+   <h1 class="fade-in">Where Am I?</h1>
+    <img class="home-images right fade-in" src="https://github.com/fairviewbookclub/fairviewbookclub.github.io/blob/main/4tj94r9a5ruhco8roff9an6bak-e1f8e8bcadc9839a6def9c657e74caf2.png?raw=true" width="250px">
+    <p class="fade-in">Ah, the big moment. You clicked. You did the thing. Now you're probably wondering: <em>"Okay, cool... so what am I actually looking at?"</em>
+	</p>
+			 <p class="fade-in">
+Well, my friend, welcome to the Events Archive — our carefully organized and coded archive. Here lies the digital scrapbook of every event we've hosted, planned, dreamed about, or mildly panicked over by our CEO. You'll find entires of events and meet-ups we did -proof that this club is very much alive. You'll find pictures that didn't know you were in. (Hey, don't look at <em>me</em>. I'm just the coder here.) and a bunch of other stuff. Enjoy!</p><br><br><br>
+
+ </section>
+		 
+  <div class="filter-controls fade-in">
   <label for="filterYear">Year:</label>
   <select id="filterYear">
     <option value="">All</option>
@@ -1643,7 +1680,7 @@ startCountdown("2025-09-28T18:00:00"); // update date as needed
 	  if (theme === 'dark') {
 	    document.body.classList.add('dark-mode');
 	    document.body.classList.remove('light-mode');
-	    icon.src = 'https://www.svgrepo.com/show/215050/sunset.svg';
+	    icon.src = 'https://www.svgrepo.com/show/15836/sun-shape.svg';
 	  } else {
 	    document.body.classList.add('light-mode');
 	    document.body.classList.remove('dark-mode');
